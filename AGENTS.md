@@ -35,5 +35,9 @@ Favor evidence and case studies over generic skill lists. Do not expose private 
 
 - Develop changes on focused branches and review them through pull requests.
 - Before merging application changes, run lint, typecheck, and build.
+- Local-assisted development means the user has the repository locally and runs validation locally. Do not duplicate routine validation in GitHub Actions unless requested.
+- Remote development should use GitHub validation before merge: add the `remote-validation` PR label to run CI on PR updates. Manual validation is also available through CI's `workflow_dispatch` trigger.
+- Validation uses Node 22 and consists of `npm ci`, `npm run lint`, `npm run typecheck`, and `npm run build`.
+- Never claim local validation unless it actually ran successfully.
 - Keep main deployable.
-- GitHub Actions publishes the static export to GitHub Pages after validation on main.
+- GitHub Pages deployment performs its own clean install, validation, and production build before publishing the static export on main.

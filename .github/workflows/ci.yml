@@ -2,29 +2,25 @@ name: CI
 
 on:
   pull_request:
-  push:
-    branches: [main]
+    types: [opened, synchronize, reopened, labeled]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   validate:
+    # Local-assisted PRs validate locally. Opt remote PRs in with this label.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.pull_request.labels.*.name, 'remote-validation')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Bootstrap lockfile
-        if: ${{ hashFiles('package-lock.json') == '' }}
-        run: npm install --package-lock-only --ignore-scripts
-      - name: Preserve generated lockfile
-        if: ${{ hashFiles('package-lock.json') == '' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-package-lock
-          path: package-lock.json
+          cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
