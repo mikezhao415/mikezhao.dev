@@ -10,8 +10,8 @@ The site documents a progression from data analysis into analytics engineering a
 - React
 - TypeScript
 - Tailwind CSS
-- GitHub Actions
-- GitHub Pages
+- GitHub
+- Vercel
 
 ## Development
 
@@ -28,4 +28,12 @@ npm run typecheck
 npm run build
 ```
 
-The production build is a static export suitable for GitHub Pages.
+## Deployment
+
+GitHub is the public source of truth for the site. The repository is connected to Vercel using its Git integration:
+
+- `main` is the production branch.
+- Pull requests and non-production branches receive Vercel Preview deployments.
+- `mikezhao.dev` is the production custom domain.
+
+The application runs as a normal Next.js App Router project; it is not configured for static export or GitHub Pages.
