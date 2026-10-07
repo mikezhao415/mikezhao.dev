@@ -1,81 +1,306 @@
-const work = [
-  {
-    eyebrow: "Analytics engineering",
-    title: "BI as Code",
-    description:
-      "Treating analytics as an engineered system: version-controlled models, automated validation, reusable metrics, and CI/CD.",
-    href: "https://github.com/mikezhao415/bi-as-code",
-  },
-  {
-    eyebrow: "Software engineering",
-    title: "Production systems",
-    description:
-      "Building full-stack applications while applying deliberate architecture, testing, security, and deployment practices.",
-    href: "#about",
-  },
+import {
+  capabilities,
+  certifications,
+  experience,
+  selectedWork,
+} from "../content/portfolio";
+
+const navigation = [
+  ["About", "about"],
+  ["Experience", "experience"],
+  ["Work", "work"],
+  ["Contact", "contact"],
 ];
 
-export default function Home() {
+function SectionHeading({
+  number,
+  title,
+  subtitle,
+}: {
+  number: string;
+  title: string;
+  subtitle: string;
+}) {
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 sm:px-10 lg:px-16">
-      <nav className="flex items-center justify-between border-b border-[var(--line)] pb-5 text-sm">
-        <a href="#" className="font-semibold tracking-tight">Mike Zhao</a>
-        <div className="flex gap-5 text-[var(--muted)]">
-          <a href="#work" className="hover:text-[var(--foreground)]">Work</a>
-          <a href="#about" className="hover:text-[var(--foreground)]">About</a>
-          <a href="https://github.com/mikezhao415" className="hover:text-[var(--foreground)]">GitHub</a>
-        </div>
-      </nav>
+    <header className="section-heading">
+      <p className="eyebrow">
+        {number} / {subtitle}
+      </p>
+      <h2>{title}</h2>
+    </header>
+  );
+}
 
-      <section className="grid min-h-[70vh] content-center py-20 lg:grid-cols-12">
-        <div className="lg:col-span-9">
-          <p className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-[var(--accent)]">
-            Data · Analytics · Software
-          </p>
-          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-7xl">
-            I build analytics and software with an engineering mindset.
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-            I&apos;m Mike Zhao, a data analyst moving deeper into analytics engineering and software development.
-            My current focus is BI as Code: bringing version control, testing, automation, and CI/CD into the analytics workflow.
-          </p>
-        </div>
-      </section>
-
-      <section id="work" className="border-t border-[var(--line)] py-20">
-        <div className="mb-12 flex items-baseline justify-between gap-4">
-          <h2 className="text-3xl font-semibold tracking-tight">Selected work</h2>
-          <span className="text-sm text-[var(--muted)]">Building in public</span>
-        </div>
-        <div className="grid gap-px overflow-hidden border border-[var(--line)] bg-[var(--line)] md:grid-cols-2">
-          {work.map((item) => (
-            <a key={item.title} href={item.href} className="group bg-[var(--background)] p-8 transition hover:bg-white">
-              <p className="text-xs font-medium uppercase tracking-[0.16em] text-[var(--accent)]">{item.eyebrow}</p>
-              <h3 className="mt-8 text-2xl font-semibold tracking-tight">{item.title}</h3>
-              <p className="mt-3 max-w-md leading-7 text-[var(--muted)]">{item.description}</p>
-              <p className="mt-8 text-sm font-medium">Explore <span aria-hidden="true">↗</span></p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section id="about" className="grid gap-10 border-t border-[var(--line)] py-20 lg:grid-cols-12">
-        <h2 className="text-3xl font-semibold tracking-tight lg:col-span-4">The journey</h2>
-        <div className="max-w-2xl lg:col-span-7 lg:col-start-6">
-          <p className="text-2xl leading-9 tracking-tight">
-            Data Analyst <span className="text-[var(--muted)]">→</span> Analytics / BI Engineer <span className="text-[var(--muted)]">→</span> Software Builder
-          </p>
-          <p className="mt-6 leading-7 text-[var(--muted)]">
-            I&apos;m documenting not only finished dashboards and applications, but the architecture, automation,
-            testing, and decisions behind them. The goal is reliable systems—not just polished outputs.
-          </p>
-        </div>
-      </section>
-
-      <footer className="flex flex-col gap-3 border-t border-[var(--line)] py-8 text-sm text-[var(--muted)] sm:flex-row sm:justify-between">
-        <span>Mike Zhao · San Diego, California</span>
-        <a href="https://github.com/mikezhao415" className="hover:text-[var(--foreground)]">github.com/mikezhao415</a>
-      </footer>
-    </main>
+export default function Home() {
+  const identity = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Mike Zhao",
+    url: "https://mikezhao.dev",
+    jobTitle: "Principal Data Informatics Analyst",
+    sameAs: [
+      "https://github.com/mikezhao415",
+      "https://www.linkedin.com/in/mikezhao415/",
+    ],
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "University of California, San Diego",
+    },
+  };
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(identity).replace(/</g, "\\u003c"),
+        }}
+      />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <div className="shell">
+        <header className="site-header">
+          <a className="wordmark" href="#main" aria-label="Mike Zhao, home">
+            Mike Zhao<span aria-hidden="true">.</span>
+          </a>
+          <nav aria-label="Main navigation">
+            {navigation.map(([label, id]) => (
+              <a key={id} href={`#${id}`}>
+                {label}
+              </a>
+            ))}
+          </nav>
+        </header>
+        <main id="main">
+          <section className="hero" aria-labelledby="hero-title">
+            <div>
+              <p className="eyebrow">Data · Analytics Engineering · Software</p>
+              <h1 id="hero-title">
+                Understanding systems.
+                <br />
+                <span>Building better ways to work.</span>
+              </h1>
+              <p className="hero-copy">
+                I’m Mike Zhao, a Principal Data Informatics Analyst. My work
+                connects project delivery, process improvement, and analytics
+                engineering. Outside my professional role, I build software and
+                explore how engineering practices can make complex work more
+                reliable.
+              </p>
+              <div className="hero-actions">
+                <a className="button" href="#work">
+                  Explore selected work <span aria-hidden="true">↘</span>
+                </a>
+                <a className="text-link" href="#about">
+                  Meet Mike <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+            <aside className="hero-note">
+              <span className="eyebrow">Based in</span>
+              <p>
+                San Diego,
+                <br />
+                California
+              </p>
+              <span className="note-line" />
+              <span className="eyebrow">Current focus</span>
+              <p>
+                Reporting architecture.
+                <br />
+                BI as Code.
+                <br />
+                Software development.
+              </p>
+            </aside>
+          </section>
+          <section
+            id="about"
+            className="section about"
+            aria-labelledby="about-title"
+          >
+            <div>
+              <p className="eyebrow">01 / The through-line</p>
+              <h2 id="about-title">
+                A career built
+                <br />
+                on improving systems.
+              </h2>
+              <p className="journey">
+                Deliver → Optimize → Analyze → Engineer → Build and influence
+              </p>
+            </div>
+            <div className="prose">
+              <p>
+                I started in project management, learning to bring people,
+                priorities, and delivery together. Earning my Project Management
+                Professional (PMP) certification in August 2018 helped build
+                that foundation, strengthening my approach to planning,
+                stakeholder alignment, and execution.
+              </p>
+              <p>
+                Lean Six Sigma reinforced my interest in removing friction and
+                repetitive work. At Mitchell International, that interest led me
+                into data informatics: first Excel and VBA automation, then
+                Oracle SQL and Tableau, and eventually analytical data modeling
+                and reporting architecture.
+              </p>
+              <p>
+                As a Senior Data Informatics Analyst, I independently owned
+                complex reporting solutions and developed Power BI expertise
+                through self-directed learning and hands-on delivery. The work
+                taught me to investigate unfamiliar data, test assumptions, and
+                make technical decisions understandable to others.
+              </p>
+              <p>
+                Since my promotion to Principal on September 28, 2026, I’m
+                collaborating with my manager and colleagues to explore BI as
+                Code. It’s an early conversation about bringing software
+                engineering practices into analytics. My personal software
+                projects give me another place to learn, experiment, and build.
+              </p>
+            </div>
+          </section>
+          <section id="experience" className="section" aria-label="Experience">
+            <SectionHeading
+              number="02"
+              title="Experience"
+              subtitle="From delivery to technical ownership"
+            />
+            <ol className="timeline">
+              {experience.map((role, index) => (
+                <li key={role.title + role.company}>
+                  <div className="timeline-meta">
+                    <p className="eyebrow">{role.company}</p>
+                    <p className="dates">{role.dates}</p>
+                  </div>
+                  <div>
+                    <h3>
+                      {role.title}
+                      {index === 0 && <span className="current">Current</span>}
+                    </h3>
+                    <p>{role.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+          <section id="work" className="section" aria-label="Selected work">
+            <SectionHeading
+              number="03"
+              title="Selected work & ideas"
+              subtitle="Practice, ownership, exploration"
+            />
+            <div className="work-grid">
+              {selectedWork.map((item, index) => (
+                <article className="work-card" key={item.title}>
+                  <div className="card-top">
+                    <p className="eyebrow">{item.category}</p>
+                    <span aria-hidden="true">0{index + 1}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <div className="card-bottom">
+                    <small>{item.note}</small>
+                    {"href" in item && (
+                      <a className="text-link" href={item.href}>
+                        {item.linkLabel} <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+          <section id="skills" className="section" aria-label="Capabilities">
+            <SectionHeading
+              number="04"
+              title="Capabilities"
+              subtitle="Tools with a purpose"
+            />
+            <div className="skills-grid">
+              {capabilities.map((group) => (
+                <article key={group.title}>
+                  <h3>{group.title}</h3>
+                  <p>{group.description}</p>
+                  <ul>
+                    {group.skills.map((skill) => (
+                      <li key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+          <section
+            id="credentials"
+            className="section"
+            aria-label="Education and certifications"
+          >
+            <SectionHeading
+              number="05"
+              title="Education & certifications"
+              subtitle="Foundations and continued learning"
+            />
+            <div className="education">
+              <p className="eyebrow">University of California, San Diego</p>
+              <h3>BS, Management Science</h3>
+              <p>2014</p>
+            </div>
+            <ul className="credentials">
+              {certifications.map((item) => (
+                <li key={item.name}>
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>
+                      {item.issuer} · Issued {item.issued}
+                    </p>
+                  </div>
+                  <span
+                    className={
+                      item.expired
+                        ? "credential-status expired"
+                        : "credential-status"
+                    }
+                  >
+                    {item.status}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section
+            id="contact"
+            className="section contact"
+            aria-labelledby="contact-title"
+          >
+            <div>
+              <p className="eyebrow">06 / Start a conversation</p>
+              <h2 id="contact-title">Let’s connect.</h2>
+              <p>
+                Interested in data, analytics engineering, or thoughtful
+                software development? I’d enjoy comparing notes.
+              </p>
+            </div>
+            <div className="contact-links">
+              <a href="mailto:mikezhao415@gmail.com">
+                mikezhao415@gmail.com <span aria-hidden="true">↗</span>
+              </a>
+              <a href="https://github.com/mikezhao415">
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+              <a href="https://www.linkedin.com/in/mikezhao415/">
+                LinkedIn <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+        </main>
+        <footer className="site-footer">
+          <p>Mike Zhao · San Diego, California</p>
+          <p>A personal portfolio. Views are my own.</p>
+          <a href="#main">Back to top ↑</a>
+        </footer>
+      </div>
+    </>
   );
 }
