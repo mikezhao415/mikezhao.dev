@@ -11,12 +11,12 @@ const projects = [
   },
   {
     number: "02",
-    type: "Software · In progress",
-    title: "A portfolio built with intent",
+    type: "Software · Personal site",
+    title: "mikezhao.dev",
     description:
-      "An evolving home for the work, decisions, and engineering practices behind a career moving from data analysis toward software building.",
-    href: "#journey",
-    linkLabel: "Read the story",
+      "A portfolio built to document a cross-disciplinary path through analytics, product development, and software engineering.",
+    href: "https://github.com/mikezhao415/mikezhao.dev",
+    linkLabel: "View the source",
     visual: "portfolio",
   },
 ];
@@ -57,7 +57,7 @@ export function PortfolioHome() {
             <span className="status-dot" aria-hidden="true" />
             <span>San Diego, California</span>
             <span className="kicker-divider" aria-hidden="true">/</span>
-            <span>Open to what's next</span>
+            <span>Data, products &amp; software</span>
           </div>
 
           <div className="hero-layout">
@@ -68,10 +68,10 @@ export function PortfolioHome() {
                 <span className="hero-subtitle">Building at the intersection of data and software.</span>
               </h1>
               <p className="hero-description">
-                I'm a technology professional whose work spans project management,
-                product development, and analytics. Now I'm bringing that
-                perspective into software engineering—with a focus on making
-                analytics more reliable, testable, and built to last.
+                I&apos;m a technology professional with experience spanning project
+                management, product development, analytics, and software
+                engineering. I bring that cross-functional perspective to
+                building reliable, testable analytics and thoughtful software.
               </p>
               <div className="hero-actions">
                 <a className="button-primary" href="#work">
@@ -208,7 +208,7 @@ export function PortfolioHome() {
               </ul>
               <div className="certifications">
                 <p className="practice-label">Certifications</p>
-                <p>No certifications are listed here. This site stays focused on work and experience that can be directly shown.</p>
+                <p>Certifications are not listed on this site at this time.</p>
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@ export function PortfolioHome() {
             <div className="contact-copy">
               <p className="eyebrow">04 / Contact</p>
               <h2 id="contact-title">Good work starts<br />with a conversation<span>.</span></h2>
-              <p>I'm interested in thoughtful teams, useful problems, and the space where analytics meets software.</p>
+              <p>I&apos;m interested in thoughtful teams, useful problems, and the space where analytics meets software.</p>
             </div>
             <div className="contact-action">
               <span className="contact-label">FIND ME ON</span>
