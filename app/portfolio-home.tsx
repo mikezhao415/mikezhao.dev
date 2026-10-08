@@ -24,6 +24,7 @@ export function PortfolioHome() {
         Skip to content
       </a>
 
+      <div id="top" aria-hidden="true" />
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Mike Zhao, home">
           <span className="wordmark-mark" aria-hidden="true">M</span>
@@ -38,12 +39,10 @@ export function PortfolioHome() {
       </header>
 
       <main id="main-content">
-        <section className="hero section-shell" id="top" aria-labelledby="hero-title">
+        <section className="hero section-shell" aria-labelledby="hero-title">
           <div className="hero-kicker">
             <span className="status-dot" aria-hidden="true" />
             <span>San Diego, California</span>
-            <span className="kicker-divider" aria-hidden="true">/</span>
-            <span>Data, products &amp; software</span>
           </div>
 
           <div className="hero-layout">
@@ -63,14 +62,13 @@ export function PortfolioHome() {
                 <a className="button-primary" href="#work">
                   Explore selected work <span aria-hidden="true">↓</span>
                 </a>
-                <a className="text-link" href="https://github.com/mikezhao415">
+                <a className="text-link" href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer">
                   GitHub <span aria-hidden="true">↗</span>
                 </a>
               </div>
             </div>
 
             <aside className="hero-note" aria-label="Professional direction">
-              <span className="note-index">A / 01</span>
               <p className="note-label">The throughline</p>
               <p className="note-statement">Better systems.<br />More useful data.<br />Thoughtful software.</p>
               <div className="note-bottom">
@@ -94,7 +92,7 @@ export function PortfolioHome() {
               <p className="eyebrow">01 / Selected work</p>
               <h2 id="work-title">Ideas, made tangible.</h2>
             </div>
-            <p className="section-intro">A small, growing collection of work and the thinking behind it.</p>
+            <p className="section-intro editorial-callout">A small, growing collection of work and the thinking behind it.</p>
           </div>
 
           <div className="project-grid">
@@ -127,7 +125,7 @@ export function PortfolioHome() {
                   <p>{project.description}</p>
                   <p className="project-note">{project.note}</p>
                   {"href" in project && (
-                    <a className="project-link" href={project.href}>
+                    <a className="project-link" href={project.href} target={project.href.startsWith("http") ? "_blank" : undefined} rel={project.href.startsWith("http") ? "noopener noreferrer" : undefined}>
                       {project.linkLabel} <span aria-hidden="true">↗</span>
                     </a>
                   )}
@@ -203,7 +201,7 @@ export function PortfolioHome() {
           <div className="section-heading"><div><p className="eyebrow">04 / Capabilities</p><h2 id="capabilities-title">Experience across disciplines.</h2></div></div>
           <div className="project-grid">
             {capabilities.map((group) => (
-              <article className="project-card project-body" key={group.title}>
+              <article className="project-card project-body capability-card" key={group.title}>
                 <h3>{group.title}</h3><p>{group.description}</p>
                 <ul className="tech-list capability-skills">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
               </article>
@@ -229,11 +227,12 @@ export function PortfolioHome() {
             </div>
             <div className="contact-action">
               <span className="contact-label">FIND ME ON</span>
-              <a href="https://github.com/mikezhao415" aria-label="Mike Zhao on GitHub">
+              <a href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer" aria-label="Mike Zhao on GitHub">
                 GitHub <span aria-hidden="true">↗</span>
               </a>
-              <a href="mailto:mikezhao415@gmail.com">Email <span aria-hidden="true">↗</span></a>
-              <a href="https://www.linkedin.com/in/mikezhao415/">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+              <span className="contact-label contact-email-label">GET IN TOUCH</span>
+              <a className="contact-email" href="mailto:hello@mikezhao.dev">hello@mikezhao.dev <span aria-hidden="true">↗</span></a>
               <span className="contact-location">San Diego, CA · Pacific Time</span>
             </div>
             <span className="contact-index" aria-hidden="true">MZ / 2026</span>
