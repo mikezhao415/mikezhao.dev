@@ -87,6 +87,7 @@ export const capabilities = [
       "Excel & VBA",
       "Data modeling",
       "Query optimization",
+      "Python coursework",
     ],
   },
   {
@@ -112,7 +113,6 @@ export const capabilities = [
       "Git",
       "Automated validation & CI/CD",
       "AI-assisted development",
-      "Python coursework",
     ],
   },
   {
@@ -131,45 +131,33 @@ export const capabilities = [
 
 export const certifications = [
   {
-    name: "Project Management Professional (PMP)",
-    issuer: "Project Management Institute",
-    issued: "Aug 2018",
-    status: "Expires Aug 2027",
-    expired: false,
-  },
-  {
-    name: "Lean Six Sigma Green Belt",
-    issuer: "GLSS (GoLeanSixSigma.com)",
-    issued: "Dec 2019",
-    status: "No expiration provided",
-    expired: false,
-  },
-  {
     name: "IBM Data Science Specialization",
     issuer: "Coursera",
     issued: "Oct 2023",
-    status: "No expiration provided",
-    expired: false,
   },
   {
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
     issued: "Sep 2022",
-    status: "Expired Sep 2025",
-    expired: true,
   },
   {
     name: "Tableau Desktop Certified Associate",
     issuer: "Tableau",
     issued: "Jun 2020",
-    status: "Expired Jun 2022",
-    expired: true,
   },
   {
     name: "Certified Scrum Product Owner (CSPO)",
     issuer: "Scrum Alliance",
     issued: "Dec 2019",
-    status: "Expired Dec 2021",
-    expired: true,
+  },
+  {
+    name: "Lean Six Sigma Green Belt",
+    issuer: "GLSS (GoLeanSixSigma.com)",
+    issued: "Dec 2019",
+  },
+  {
+    name: "Project Management Professional (PMP)",
+    issuer: "Project Management Institute",
+    issued: "Aug 2018",
   },
 ];

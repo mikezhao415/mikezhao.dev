@@ -24,6 +24,7 @@ export function PortfolioHome() {
         Skip to content
       </a>
 
+      <div id="top" aria-hidden="true" />
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Mike Zhao, home">
           <span className="wordmark-mark" aria-hidden="true">M</span>
@@ -33,22 +34,20 @@ export function PortfolioHome() {
           <a href="#work">Work</a>
           <a href="#journey">Journey</a>
           <a href="#practice">Practice</a>
-          <a className="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+          <a className="nav-contact" href="#contact">Get in touch</a>
         </nav>
       </header>
 
       <main id="main-content">
-        <section className="hero section-shell" id="top" aria-labelledby="hero-title">
+        <section className="hero section-shell" aria-labelledby="hero-title">
           <div className="hero-kicker">
             <span className="status-dot" aria-hidden="true" />
             <span>San Diego, California</span>
-            <span className="kicker-divider" aria-hidden="true">/</span>
-            <span>Data, products &amp; software</span>
           </div>
 
           <div className="hero-layout">
             <div className="hero-copy">
-              <p className="eyebrow">Delivery · Analytics · Software</p>
+              <p className="eyebrow">Data · Systems · Engineering</p>
               <h1 id="hero-title">
                 Mike Zhao<span className="hero-period">.</span>
                 <span className="hero-subtitle">Building at the intersection of data and software.</span>
@@ -63,14 +62,13 @@ export function PortfolioHome() {
                 <a className="button-primary" href="#work">
                   Explore selected work <span aria-hidden="true">↓</span>
                 </a>
-                <a className="text-link" href="https://github.com/mikezhao415">
-                  GitHub <span aria-hidden="true">↗</span>
+                <a className="text-link" href="#contact">
+                  Connect
                 </a>
               </div>
             </div>
 
             <aside className="hero-note" aria-label="Professional direction">
-              <span className="note-index">A / 01</span>
               <p className="note-label">The throughline</p>
               <p className="note-statement">Better systems.<br />More useful data.<br />Thoughtful software.</p>
               <div className="note-bottom">
@@ -94,7 +92,7 @@ export function PortfolioHome() {
               <p className="eyebrow">01 / Selected work</p>
               <h2 id="work-title">Ideas, made tangible.</h2>
             </div>
-            <p className="section-intro">A small, growing collection of work and the thinking behind it.</p>
+            <p className="section-intro editorial-callout">A small, growing collection of work and the thinking behind it.</p>
           </div>
 
           <div className="project-grid">
@@ -103,7 +101,7 @@ export function PortfolioHome() {
                 <div className="project-art" aria-hidden="true">
                   {project.visual === "bi" ? (
                     <>
-                      <div className="art-topline"><span>ANALYTICS SYSTEM</span><span>001 / BI</span></div>
+                      <div className="art-topline"><span>ANALYTICS SYSTEM</span></div>
                       <div className="art-flow">
                         <span className="flow-node">SOURCE</span>
                         <span className="flow-connector" />
@@ -115,20 +113,20 @@ export function PortfolioHome() {
                     </>
                   ) : (
                     <>
-                      <div className="art-topline"><span>FIELD NOTES</span><span>002 / NOW</span></div>
+                      <div className="art-topline"><span>FIELD NOTES</span></div>
                       <div className="portfolio-art-title">Build with<br />a point of view<span>.</span></div>
                       <div className="art-bottomline"><span>THOUGHTFUL BY DEFAULT</span></div>
                     </>
                   )}
                 </div>
                 <div className="project-body">
-                  <div className="project-meta"><span>{project.type}</span><span>{project.number}</span></div>
+                  <div className="project-meta"><span>{project.type}</span></div>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
                   <p className="project-note">{project.note}</p>
-                  {"href" in project && (
-                    <a className="project-link" href={project.href}>
-                      {project.linkLabel} <span aria-hidden="true">↗</span>
+                  {project.href && (
+                    <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
+                      {project.linkLabel}
                     </a>
                   )}
                 </div>
@@ -203,7 +201,7 @@ export function PortfolioHome() {
           <div className="section-heading"><div><p className="eyebrow">04 / Capabilities</p><h2 id="capabilities-title">Experience across disciplines.</h2></div></div>
           <div className="project-grid">
             {capabilities.map((group) => (
-              <article className="project-card project-body" key={group.title}>
+              <article className="project-card project-body capability-card" key={group.title}>
                 <h3>{group.title}</h3><p>{group.description}</p>
                 <ul className="tech-list capability-skills">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
               </article>
@@ -215,7 +213,7 @@ export function PortfolioHome() {
           <div className="education"><h3>University of California, San Diego</h3><p>BS, Management Science · 2014</p></div>
           <ul className="credential-list">
             {certifications.map((item) => (
-              <li key={item.name}><div><h3>{item.name}{item.expired && <span className="credential-expired"> (expired)</span>}</h3><p>{item.issuer} · Issued {item.issued}</p></div></li>
+              <li key={item.name}><div><h3>{item.name}</h3><p>{item.issuer} · Issued {item.issued}</p></div></li>
             ))}
           </ul>
         </section>
@@ -224,19 +222,19 @@ export function PortfolioHome() {
           <div className="contact-card">
             <div className="contact-copy">
               <p className="eyebrow">06 / Contact</p>
-              <h2 id="contact-title">Good work starts<br />with a conversation<span>.</span></h2>
+              <h2 id="contact-title">Good work starts with a conversation<span>.</span></h2>
               <p>I&apos;m interested in thoughtful teams, useful problems, and the space where analytics meets software.</p>
             </div>
             <div className="contact-action">
               <span className="contact-label">FIND ME ON</span>
-              <a href="https://github.com/mikezhao415" aria-label="Mike Zhao on GitHub">
-                GitHub <span aria-hidden="true">↗</span>
+              <a href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer" aria-label="Mike Zhao on GitHub">
+                GitHub
               </a>
-              <a href="mailto:mikezhao415@gmail.com">Email <span aria-hidden="true">↗</span></a>
-              <a href="https://www.linkedin.com/in/mikezhao415/">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <span className="contact-label contact-email-label">GET IN TOUCH</span>
+              <a className="contact-email" href="mailto:hello@mikezhao.dev">hello@mikezhao.dev</a>
               <span className="contact-location">San Diego, CA · Pacific Time</span>
             </div>
-            <span className="contact-index" aria-hidden="true">MZ / 2026</span>
           </div>
         </section>
       </main>
