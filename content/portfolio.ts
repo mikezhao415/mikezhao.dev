@@ -131,25 +131,11 @@ export const capabilities = [
 
 export const certifications = [
   {
-    name: "Project Management Professional (PMP)",
-    issuer: "Project Management Institute",
-    issued: "Aug 2018",
-    status: "Expires Aug 2027",
-    expired: false,
-  },
-  {
-    name: "Lean Six Sigma Green Belt",
-    issuer: "GLSS (GoLeanSixSigma.com)",
+    name: "Certified Scrum Product Owner (CSPO)",
+    issuer: "Scrum Alliance",
     issued: "Dec 2019",
-    status: "No expiration provided",
-    expired: false,
-  },
-  {
-    name: "IBM Data Science Specialization",
-    issuer: "Coursera",
-    issued: "Oct 2023",
-    status: "No expiration provided",
-    expired: false,
+    status: "Expired Dec 2021",
+    expired: true,
   },
   {
     name: "AWS Certified Cloud Practitioner",
@@ -166,10 +152,24 @@ export const certifications = [
     expired: true,
   },
   {
-    name: "Certified Scrum Product Owner (CSPO)",
-    issuer: "Scrum Alliance",
+    name: "Lean Six Sigma Green Belt",
+    issuer: "GLSS (GoLeanSixSigma.com)",
     issued: "Dec 2019",
-    status: "Expired Dec 2021",
-    expired: true,
+    status: "No expiration provided",
+    expired: false,
+  },
+  {
+    name: "IBM Data Science Specialization",
+    issuer: "Coursera",
+    issued: "Oct 2023",
+    status: "No expiration provided",
+    expired: false,
+  },
+  {
+    name: "Project Management Professional (PMP)",
+    issuer: "Project Management Institute",
+    issued: "Aug 2018",
+    status: "Expires Aug 2027",
+    expired: false,
   },
 ];
