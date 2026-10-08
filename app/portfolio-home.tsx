@@ -136,7 +136,7 @@ export function PortfolioHome() {
               <p className="eyebrow">02 / Professional direction</p>
               <h2 id="journey-title">A career in motion.</h2>
             </div>
-            <p className="section-intro">Different disciplines, connected by a single question: how can we build it better?</p>
+            <p className="section-intro editorial-callout">Different disciplines, connected by a single question: how can we build it better?</p>
           </div>
 
           <div className="career-narrative">
@@ -170,7 +170,7 @@ export function PortfolioHome() {
               <p className="eyebrow">03 / Technical practice</p>
               <h2 id="practice-title">Tools are the means.<br />Good systems are the point.</h2>
             </div>
-            <p className="section-intro">The practices behind the work, plus the stack powering this site.</p>
+            <p className="section-intro editorial-callout">The practices behind the work, plus the stack powering this site.</p>
           </div>
 
           <div className="practice-content">
