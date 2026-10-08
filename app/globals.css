@@ -951,3 +951,8 @@ a:focus-visible {
 
 /* Keep the contact headline readable without forced mid-phrase breaks. */
 @media (max-width: 600px) { .contact-copy h2 { font-size: clamp(32px, 9vw, 44px); line-height: 1.08; letter-spacing: -0.055em; overflow-wrap: normal; } }
+
+/* Career Journey: readable text on the inset panel's slightly darker surface. */
+.journey-panel { color: var(--ink); }
+.journey-panel .role-meta,
+.journey-panel .journey-list li p { color: var(--ink); }
