@@ -34,7 +34,7 @@ export function PortfolioHome() {
           <a href="#work">Work</a>
           <a href="#journey">Journey</a>
           <a href="#practice">Practice</a>
-          <a className="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+          <a className="nav-contact" href="#contact">Get in touch</a>
         </nav>
       </header>
 
@@ -63,7 +63,7 @@ export function PortfolioHome() {
                   Explore selected work <span aria-hidden="true">↓</span>
                 </a>
                 <a className="text-link" href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer">
-                  GitHub <span aria-hidden="true">↗</span>
+                  GitHub
                 </a>
               </div>
             </div>
@@ -101,7 +101,7 @@ export function PortfolioHome() {
                 <div className="project-art" aria-hidden="true">
                   {project.visual === "bi" ? (
                     <>
-                      <div className="art-topline"><span>ANALYTICS SYSTEM</span><span>001 / BI</span></div>
+                      <div className="art-topline"><span>ANALYTICS SYSTEM</span></div>
                       <div className="art-flow">
                         <span className="flow-node">SOURCE</span>
                         <span className="flow-connector" />
@@ -113,20 +113,20 @@ export function PortfolioHome() {
                     </>
                   ) : (
                     <>
-                      <div className="art-topline"><span>FIELD NOTES</span><span>002 / NOW</span></div>
+                      <div className="art-topline"><span>FIELD NOTES</span></div>
                       <div className="portfolio-art-title">Build with<br />a point of view<span>.</span></div>
                       <div className="art-bottomline"><span>THOUGHTFUL BY DEFAULT</span></div>
                     </>
                   )}
                 </div>
                 <div className="project-body">
-                  <div className="project-meta"><span>{project.type}</span><span>{project.number}</span></div>
+                  <div className="project-meta"><span>{project.type}</span></div>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
                   <p className="project-note">{project.note}</p>
                   {project.href && (
                     <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
-                      {project.linkLabel} <span aria-hidden="true">↗</span>
+                      {project.linkLabel}
                     </a>
                   )}
                 </div>
@@ -228,14 +228,13 @@ export function PortfolioHome() {
             <div className="contact-action">
               <span className="contact-label">FIND ME ON</span>
               <a href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer" aria-label="Mike Zhao on GitHub">
-                GitHub <span aria-hidden="true">↗</span>
+                GitHub
               </a>
-              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <span className="contact-label contact-email-label">GET IN TOUCH</span>
-              <a className="contact-email" href="mailto:hello@mikezhao.dev">hello@mikezhao.dev <span aria-hidden="true">↗</span></a>
+              <a className="contact-email" href="mailto:hello@mikezhao.dev">hello@mikezhao.dev</a>
               <span className="contact-location">San Diego, CA · Pacific Time</span>
             </div>
-            <span className="contact-index" aria-hidden="true">MZ / 2026</span>
           </div>
         </section>
       </main>
