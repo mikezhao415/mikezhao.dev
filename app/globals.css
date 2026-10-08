@@ -945,4 +945,7 @@ a:focus-visible {
 .contact-action > .contact-email { font-size: clamp(17px, 2vw, 22px); overflow-wrap: anywhere; }
 @media (min-width: 781px) { .hero-layout { grid-template-columns: minmax(0, 1fr) minmax(230px, .34fr); } }
 @media (max-width: 780px) { .hero-note { min-height: 190px; } }
-\n/* Quieter illustration captions, including on small screens. */\n.project-art .art-topline, .project-art .art-bottomline { font-size: 11px; letter-spacing: 0.09em; line-height: 1.4; }\n@media (max-width: 600px) { .project-art .art-topline, .project-art .art-bottomline { font-size: 10px; letter-spacing: 0.06em; } }\n
+
+/* Quieter illustration captions, including on small screens. */
+.project-art .art-topline, .project-art .art-bottomline { font-size: 11px; letter-spacing: 0.09em; line-height: 1.4; }
+@media (max-width: 600px) { .project-art .art-topline, .project-art .art-bottomline { font-size: 10px; letter-spacing: 0.06em; } }
