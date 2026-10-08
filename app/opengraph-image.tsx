@@ -1,32 +1,71 @@
 import { ImageResponse } from "next/og";
-export const alt = "Mike Zhao — Project Delivery · Analytics · Software";
+
+export const alt =
+  "Mike Zhao — Data · Engineering · Design. Where analytical thinking meets creative execution.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
 export default function Image() {
   return new ImageResponse(
     <div
       style={{
-        background: "#f5f2ea",
+        display: "flex",
+        position: "relative",
         width: "100%",
         height: "100%",
-        display: "flex",
         flexDirection: "column",
-        padding: "80px",
         justifyContent: "space-between",
-        color: "#1b201d",
+        overflow: "hidden",
+        padding: "62px 76px 58px",
+        backgroundColor: "#0b1724",
+        color: "#f5f2ea",
+        fontFamily: "Arial, Helvetica, sans-serif",
       }}
     >
-      <div style={{ fontSize: 30 }}>Mike Zhao</div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ fontSize: 64, letterSpacing: -3 }}>
-          Understanding systems.
+      <svg
+        width="440"
+        height="330"
+        viewBox="0 0 440 330"
+        style={{ position: "absolute", right: -16, top: -22, opacity: 0.65 }}
+        aria-hidden="true"
+      >
+        {Array.from({ length: 9 }, (_, index) => (
+          <path
+            key={index}
+            d={`M ${20 + index * 32} -20 C ${350 - index * 9} 90, ${80 + index * 23} 180, 460 350`}
+            stroke="#35475a"
+            strokeWidth="2"
+            fill="none"
+          />
+        ))}
+      </svg>
+
+      <div style={{ display: "flex", fontSize: 27, fontWeight: 700, letterSpacing: 2 }}>
+        MIKE ZHAO
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", maxWidth: 1048, gap: 28 }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 65,
+            fontWeight: 700,
+            letterSpacing: -2.5,
+            lineHeight: 1.08,
+          }}
+        >
+          Data · Engineering · Design
         </div>
-        <div style={{ fontSize: 64, letterSpacing: -3, color: "#b83e25" }}>
-          Building better ways to work.
+        <div style={{ display: "flex", color: "#b8c4cf", fontSize: 31, lineHeight: 1.3 }}>
+          Where analytical thinking meets creative execution.
         </div>
       </div>
-      <div style={{ fontSize: 24, color: "#b83e25" }}>
-        Project Delivery · Analytics · Software
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 17 }}>
+        <div style={{ display: "flex", width: 52, height: 4, backgroundColor: "#c64a2c" }} />
+        <div style={{ display: "flex", color: "#a9b8c5", fontSize: 21, fontWeight: 700, letterSpacing: 2 }}>
+          MIKEZHAO.DEV
+        </div>
       </div>
     </div>,
     size,
