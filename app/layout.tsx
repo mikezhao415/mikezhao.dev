@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const title = "Mike Zhao — Project Delivery, Analytics & Software";
+const title = "Mike Zhao | Data · Engineering · Design";
 const description =
-  "Mike Zhao is a technology professional working across project management, product development, analytics, and software engineering.";
+  "Explore Mike Zhao's work across data, engineering, and design—from analytics and systems to software development and digital experiences.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mikezhao.dev"),

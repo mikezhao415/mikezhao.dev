@@ -132,7 +132,7 @@ a:focus-visible {
 }
 
 .hero {
-  padding-top: clamp(76px, 12vw, 154px);
+  padding-top: clamp(56px, 7vw, 92px);
   padding-bottom: 38px;
 }
 
@@ -181,7 +181,7 @@ a:focus-visible {
   grid-template-columns: minmax(0, 1fr) minmax(215px, 0.32fr);
   align-items: end;
   gap: clamp(40px, 8vw, 120px);
-  margin-top: 47px;
+  margin-top: 0;
 }
 
 .hero-copy {
@@ -784,7 +784,7 @@ a:focus-visible {
   }
 
   .hero-layout {
-    margin-top: 37px;
+    margin-top: 0;
   }
 
   .hero h1 {
