@@ -75,7 +75,6 @@ export function PortfolioHome() {
               <p className="note-statement">Better systems.<br />More useful data.<br />Thoughtful software.</p>
               <div className="note-bottom">
                 <span>CURIOUS BY DESIGN</span>
-                <span aria-hidden="true">↘</span>
               </div>
             </aside>
           </div>
@@ -118,7 +117,7 @@ export function PortfolioHome() {
                     <>
                       <div className="art-topline"><span>FIELD NOTES</span><span>002 / NOW</span></div>
                       <div className="portfolio-art-title">Build with<br />a point of view<span>.</span></div>
-                      <div className="art-bottomline"><span>THOUGHTFUL BY DEFAULT</span><span>↗</span></div>
+                      <div className="art-bottomline"><span>THOUGHTFUL BY DEFAULT</span></div>
                     </>
                   )}
                 </div>
@@ -166,7 +165,6 @@ export function PortfolioHome() {
                     <p className="role-meta">{role.company} · {role.dates}</p>
                     <p>{role.detail}</p>
                   </div>
-                  <span className="journey-symbol" aria-hidden="true">↗</span>
                 </li>
               ))}
             </ol>
@@ -187,7 +185,7 @@ export function PortfolioHome() {
               <p className="practice-label">Analytics engineering</p>
               <ul className="practice-list">
                 {practices.map((practice, index) => (
-                  <li key={practice}><span>0{index + 1}</span>{practice}<span aria-hidden="true">↗</span></li>
+                  <li key={practice}><span>0{index + 1}</span>{practice}</li>
                 ))}
               </ul>
             </div>
@@ -217,7 +215,7 @@ export function PortfolioHome() {
           <div className="education"><h3>University of California, San Diego</h3><p>BS, Management Science · 2014</p></div>
           <ul className="credential-list">
             {certifications.map((item) => (
-              <li key={item.name}><div><h3>{item.name}</h3><p>{item.issuer} · Issued {item.issued}</p></div><span className={item.expired ? "credential-status expired" : "credential-status"}>{item.status}</span></li>
+              <li key={item.name}><div><h3>{item.name}{item.expired && <span className="credential-expired"> (expired)</span>}</h3><p>{item.issuer} · Issued {item.issued}</p></div></li>
             ))}
           </ul>
         </section>

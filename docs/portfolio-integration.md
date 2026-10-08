@@ -29,3 +29,7 @@ No new dependencies or lockfile changes. PR #3's earlier publication approval bo
 ## Review before production
 
 Review generalized employer wording, exact dates and Entra/CRF naming, supplied credential details, and the expanded v0 layout in a browser. No accomplishments, metrics, credential IDs or proprietary technical details were invented. Credentials are based on supplied information, not independently checked with issuers.
+
+## Review refinements
+
+At Mike’s request, certificates now use two columns on desktop and one on mobile, with no expiration dates or separate status column. Historical credentials retain a brief inline “expired” label. Reading text is increased to 15–17px, with other small labels generally at least 14px. Removed decorative diagonal arrows from non-links and added an SVG favicon matching the dark-green/yellow M home mark. Lint, TypeScript, production build and production-server regression checks cover the revision, including credential labels and favicon response. Interactive browser review remains subject to Preview authentication.
