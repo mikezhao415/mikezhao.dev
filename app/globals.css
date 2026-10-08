@@ -948,4 +948,6 @@ a:focus-visible {
 /* Quieter illustration captions, including on small screens. */
 .project-art .art-topline, .project-art .art-bottomline { font-size: 11px; letter-spacing: 0.09em; line-height: 1.4; }
 @media (max-width: 600px) { .project-art .art-topline, .project-art .art-bottomline { font-size: 10px; letter-spacing: 0.06em; } }
-\n/* Keep the contact headline readable without forced mid-phrase breaks. */\n@media (max-width: 600px) { .contact-copy h2 { font-size: clamp(32px, 9vw, 44px); line-height: 1.08; letter-spacing: -0.055em; overflow-wrap: normal; } }\n
+
+/* Keep the contact headline readable without forced mid-phrase breaks. */
+@media (max-width: 600px) { .contact-copy h2 { font-size: clamp(32px, 9vw, 44px); line-height: 1.08; letter-spacing: -0.055em; overflow-wrap: normal; } }
