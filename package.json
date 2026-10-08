@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "start": "next start",
+    "test": "node scripts/check-portfolio.mjs"
   },
   "dependencies": {
     "next": "16.3.8",

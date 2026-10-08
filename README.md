@@ -1,39 +1,42 @@
 # mikezhao.dev
 
-Source for [mikezhao.dev](https://mikezhao.dev), Mike Zhao's professional portfolio and technical site.
+Source for [mikezhao.dev](https://mikezhao.dev), Mike Zhao's personal career and portfolio website.
 
-The site documents a progression from data analysis into analytics engineering and software development, with an emphasis on **BI as Code**: applying version control, automated testing, CI/CD, reusable models, and code-driven workflows to analytics.
+**Project Delivery · Analytics · Software** connects a career in project management, process improvement, data informatics, and reporting architecture with personal software development. BI as Code is described as an early-stage exploration.
 
 ## Stack
 
-- Next.js App Router
-- React
-- TypeScript
-- Tailwind CSS
-- GitHub
-- Vercel
+Next.js App Router, React, TypeScript, Tailwind CSS, GitHub, and Vercel. The portfolio uses server-rendered content without additional client libraries or form infrastructure.
 
 ## Development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Validation:
+Validation and production serving:
 
 ```bash
 npm run lint
 npm run typecheck
 npm run build
+npm run start
+# In another terminal, check the running production server:
+npm test
 ```
 
-## Deployment
+## Content
 
-GitHub is the public source of truth for the site. The repository is connected to Vercel using its Git integration:
+- `content/portfolio.ts`: experience, selected work, capabilities, and certifications.
+- `app/portfolio-home.tsx`: narrative and section layout; `app/page.tsx`: Person structured data.
+- `app/globals.css`: typography, palette, responsive layout, focus states, and reduced-motion support.
+- `app/layout.tsx`, `app/opengraph-image.tsx`, `app/robots.ts`, and `app/sitemap.ts`: identity and search/social metadata.
 
-- `main` is the production branch.
-- Pull requests and non-production branches receive Vercel Preview deployments.
-- `mikezhao.dev` is the production custom domain.
+Preserve exact titles and promotion dates. Label expired credentials accurately and distinguish professional responsibilities from personal projects. Keep employer examples generalized; never add proprietary implementation details, unapproved metrics, customer information, or credential IDs. Professional examples are personal descriptions, not employer endorsements.
 
-The application runs as a normal Next.js App Router project; it is not configured for static export or GitHub Pages.
+## Deployment and review
+
+Vercel is the sole production platform through Git integration; `main` is the production branch. PR branches ordinarily create previews. The integration branch is authorized for Preview deployment; production publication still requires review and approval. Merging into `main` triggers production deployment.
+
+Follow `AGENTS.md` for local-assisted and remote validation. Remote PRs use the `remote-validation` label to run the existing Node 22 CI checks.
