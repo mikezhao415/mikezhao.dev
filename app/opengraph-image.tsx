@@ -48,9 +48,9 @@ export default function Image() {
         <div
           style={{
             display: "flex",
-            fontSize: 77,
+            fontSize: 65,
             fontWeight: 700,
-            letterSpacing: -3.7,
+            letterSpacing: -2.5,
             lineHeight: 1.08,
           }}
         >
