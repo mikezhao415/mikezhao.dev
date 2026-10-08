@@ -213,7 +213,7 @@ export function PortfolioHome() {
           <div className="education"><h3>University of California, San Diego</h3><p>BS, Management Science · 2014</p></div>
           <ul className="credential-list">
             {certifications.map((item) => (
-              <li key={item.name}><div><h3>{item.name}{item.expired && <span className="credential-expired"> (expired)</span>}</h3><p>{item.issuer} · Issued {item.issued}</p></div></li>
+              <li key={item.name}><div><h3>{item.name}</h3><p>{item.issuer} · Issued {item.issued}</p></div></li>
             ))}
           </ul>
         </section>
@@ -222,7 +222,7 @@ export function PortfolioHome() {
           <div className="contact-card">
             <div className="contact-copy">
               <p className="eyebrow">06 / Contact</p>
-              <h2 id="contact-title">Good work starts<br />with a conversation<span>.</span></h2>
+              <h2 id="contact-title">Good work starts with a conversation<span>.</span></h2>
               <p>I&apos;m interested in thoughtful teams, useful problems, and the space where analytics meets software.</p>
             </div>
             <div className="contact-action">
