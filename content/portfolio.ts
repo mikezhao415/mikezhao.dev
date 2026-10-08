@@ -87,6 +87,7 @@ export const capabilities = [
       "Excel & VBA",
       "Data modeling",
       "Query optimization",
+      "Python coursework",
     ],
   },
   {
@@ -112,7 +113,6 @@ export const capabilities = [
       "Git",
       "Automated validation & CI/CD",
       "AI-assisted development",
-      "Python coursework",
     ],
   },
   {
