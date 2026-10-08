@@ -124,8 +124,8 @@ export function PortfolioHome() {
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
                   <p className="project-note">{project.note}</p>
-                  {"href" in project && (
-                    <a className="project-link" href={project.href} target={project.href.startsWith("http") ? "_blank" : undefined} rel={project.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                  {project.href && (
+                    <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
                       {project.linkLabel} <span aria-hidden="true">↗</span>
                     </a>
                   )}
