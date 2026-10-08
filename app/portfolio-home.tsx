@@ -40,14 +40,9 @@ export function PortfolioHome() {
 
       <main id="main-content">
         <section className="hero section-shell" aria-labelledby="hero-title">
-          <div className="hero-kicker">
-            <span className="status-dot" aria-hidden="true" />
-            <span>San Diego, California</span>
-          </div>
-
           <div className="hero-layout">
             <div className="hero-copy">
-              <p className="eyebrow">Data · Systems · Engineering</p>
+              <p className="eyebrow">Data · Engineering · Design</p>
               <h1 id="hero-title">
                 Mike Zhao<span className="hero-period">.</span>
                 <span className="hero-subtitle">Building at the intersection of data and software.</span>
