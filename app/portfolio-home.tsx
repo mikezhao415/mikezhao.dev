@@ -47,7 +47,7 @@ export function PortfolioHome() {
 
           <div className="hero-layout">
             <div className="hero-copy">
-              <p className="eyebrow">Delivery · Analytics · Software</p>
+              <p className="eyebrow">Data · Systems · Engineering</p>
               <h1 id="hero-title">
                 Mike Zhao<span className="hero-period">.</span>
                 <span className="hero-subtitle">Building at the intersection of data and software.</span>
@@ -62,8 +62,8 @@ export function PortfolioHome() {
                 <a className="button-primary" href="#work">
                   Explore selected work <span aria-hidden="true">↓</span>
                 </a>
-                <a className="text-link" href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer">
-                  GitHub
+                <a className="text-link" href="#contact">
+                  Connect
                 </a>
               </div>
             </div>
