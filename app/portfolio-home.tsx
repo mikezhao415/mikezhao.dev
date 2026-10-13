@@ -58,7 +58,7 @@ export function PortfolioHome() {
                   Get in touch
                 </a>
                 <a className="text-link" href="#journey">
-                  View résumé
+                  My experience
                 </a>
               </div>
             </div>
