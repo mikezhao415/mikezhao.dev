@@ -150,7 +150,6 @@ export function PortfolioHome() {
                   <div>
                     <h4>{item.title}</h4>
                     <p>{item.description}</p>
-                    <p className="contribution-note">{item.note}</p>
                   </div>
                 </li>
               ))}
