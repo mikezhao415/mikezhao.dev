@@ -936,10 +936,8 @@ a:focus-visible {
 .hero-note { align-self: start; min-height: 220px; }
 .note-label { margin-top: 0; }
 .editorial-callout { max-width: 330px; padding: 18px 20px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--ink); font-size: 16px; font-weight: 500; line-height: 1.55; }
-.capability-card { border-top: 5px solid var(--accent); background: var(--surface); }
-.capability-card:nth-child(3n + 2) { border-top-color: var(--deep); background: var(--surface); }
-.capability-card:nth-child(3n + 3) { border-top-color: var(--signal); background: var(--surface); }
-.capability-card:hover { border-color: var(--accent); }
+.capability-card { border-top: 5px solid var(--ink); background: var(--surface); }
+.capability-card:hover { border-top-color: var(--accent); }
 .contact-email-label { margin-top: 20px; padding-top: 20px; width: 100%; border-top: 1px solid var(--muted); }
 .contact-action > .contact-email { font-size: clamp(17px, 2vw, 22px); overflow-wrap: anywhere; }
 @media (min-width: 781px) { .hero-layout { grid-template-columns: minmax(0, 1fr) minmax(230px, .34fr); } }
@@ -956,3 +954,32 @@ a:focus-visible {
 .journey-panel { color: var(--ink); }
 .journey-panel .role-meta,
 .journey-panel .journey-list li p { color: var(--ink); }
+
+/* Separate employer / tenure metadata from the role description. */
+.journey-panel .journey-list .role-meta {
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+.journey-panel .journey-list .role-meta + p {
+  margin-top: 15px;
+  padding-left: 13px;
+  border-left: 2px solid var(--line);
+  color: var(--ink);
+  font-weight: 400;
+}
+
+/* Professional examples are editorial entries, not portfolio project cards. */
+.professional-contributions { margin: 0 0 52px; padding: 30px 0 0; border-top: 1px solid var(--line); }
+.contributions-heading { max-width: 760px; }
+.contributions-heading h3 { margin: 12px 0 10px; font-size: clamp(25px, 3.5vw, 36px); letter-spacing: -0.055em; line-height: 1.12; }
+.contributions-heading > p:last-child { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+.contributions-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin: 30px 0 0; padding: 0; list-style: none; }
+.contributions-list li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; padding-top: 20px; border-top: 2px solid var(--ink); }
+.contribution-number { color: var(--accent); font-size: 14px; font-weight: 700; }
+.contributions-list h4 { margin: 0 0 12px; font-size: clamp(19px, 2.5vw, 24px); letter-spacing: -0.04em; line-height: 1.25; }
+.contributions-list p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+.contributions-list .contribution-note { margin-top: 12px; font-size: 14px; }
+@media (max-width: 700px) { .contributions-list { grid-template-columns: minmax(0, 1fr); gap: 24px; } }

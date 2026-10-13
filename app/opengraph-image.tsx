@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Mike Zhao — Data · Engineering · Design. Where analytical thinking meets creative execution.";
+  "Mike Zhao — Where analytical thinking meets creative execution.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,25 +48,17 @@ export default function Image() {
         <div
           style={{
             display: "flex",
-            fontSize: 65,
+            fontSize: 61,
             fontWeight: 700,
             letterSpacing: -2.5,
             lineHeight: 1.08,
           }}
         >
-          Data · Engineering · Design
-        </div>
-        <div style={{ display: "flex", color: "#b8c4cf", fontSize: 31, lineHeight: 1.3 }}>
           Where analytical thinking meets creative execution.
         </div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 17 }}>
-        <div style={{ display: "flex", width: 52, height: 4, backgroundColor: "#c64a2c" }} />
-        <div style={{ display: "flex", color: "#a9b8c5", fontSize: 21, fontWeight: 700, letterSpacing: 2 }}>
-          MIKEZHAO.DEV
-        </div>
-      </div>
+      <div style={{ display: "flex", width: 52, height: 4, backgroundColor: "#c64a2c" }} />
     </div>,
     size,
   );
