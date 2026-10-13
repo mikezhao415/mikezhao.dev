@@ -1,4 +1,4 @@
-import { capabilities, certifications, experience, selectedWork } from "../content/portfolio";
+import { capabilities, certifications, experience, professionalContributions, selectedWork } from "../content/portfolio";
 
 const projects = selectedWork.map((item, index) => ({
   ...item,
@@ -137,6 +137,25 @@ export function PortfolioHome() {
             <p>At Mitchell International, that interest led from Excel and VBA automation to Oracle SQL, Tableau, analytical data modeling, and reporting architecture. As a Senior Analyst, I developed Power BI expertise through self-directed learning and hands-on delivery.</p>
             <p>Since my promotion to Principal in September, 2026, I am collaborating with my manager and colleagues to explore BI as Code. This is early-stage work; my personal software projects offer another place to learn, experiment, and build.</p>
           </div>
+          <section className="professional-contributions" aria-labelledby="contributions-title">
+            <div className="contributions-heading">
+              <p className="eyebrow">SELECTED PROFESSIONAL CONTRIBUTIONS</p>
+              <h3 id="contributions-title">From analysis to delivery.</h3>
+              <p>Examples from my professional analytics work, shared without confidential implementation details.</p>
+            </div>
+            <ol className="contributions-list">
+              {professionalContributions.map((item, index) => (
+                <li key={item.title}>
+                  <span className="contribution-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h4>{item.title}</h4>
+                    <p>{item.description}</p>
+                    <p className="contribution-note">{item.note}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
           <div className="journey-panel">
             <div className="journey-aside">
               <span className="note-index">THE ARC / DELIVERY TO ENGINEERING</span>
