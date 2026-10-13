@@ -2,21 +2,21 @@ export const experience = [
   {
     title: "Principal Data Informatics Analyst",
     company: "Mitchell International",
-    dates: "September 28, 2026–present",
+    dates: "September 2026–present",
     detail:
       "Collaborating with my manager and colleagues to explore BI as Code: version control, modular development, testing, and repeatable delivery for analytics. This work is at an early stage.",
   },
   {
     title: "Senior Data Informatics Analyst",
     company: "Mitchell International",
-    dates: "January 12, 2024–September 27, 2026",
+    dates: "January 2024–September 2026",
     detail:
       "Independently owned complex reporting solutions, developed analytical data models, and introduced Power BI through self-directed learning and project delivery. Created technical design documentation for team knowledge sharing.",
   },
   {
     title: "Data Informatics Analyst",
     company: "Mitchell International",
-    dates: "March 9, 2020–January 11, 2024",
+    dates: "March 2020–January 2024",
     detail:
       "Developed Oracle SQL, Tableau, Excel, and VBA capabilities. Automated reporting verification, improved dashboard performance and accessibility, and documented reusable workflows.",
   },
