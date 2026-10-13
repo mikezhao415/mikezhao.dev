@@ -936,10 +936,8 @@ a:focus-visible {
 .hero-note { align-self: start; min-height: 220px; }
 .note-label { margin-top: 0; }
 .editorial-callout { max-width: 330px; padding: 18px 20px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--ink); font-size: 16px; font-weight: 500; line-height: 1.55; }
-.capability-card { border-top: 5px solid var(--accent); background: var(--surface); }
-.capability-card:nth-child(3n + 2) { border-top-color: var(--deep); background: var(--surface); }
-.capability-card:nth-child(3n + 3) { border-top-color: var(--signal); background: var(--surface); }
-.capability-card:hover { border-color: var(--accent); }
+.capability-card { border-top: 5px solid var(--ink); background: var(--surface); }
+.capability-card:hover { border-top-color: var(--accent); }
 .contact-email-label { margin-top: 20px; padding-top: 20px; width: 100%; border-top: 1px solid var(--muted); }
 .contact-action > .contact-email { font-size: clamp(17px, 2vw, 22px); overflow-wrap: anywhere; }
 @media (min-width: 781px) { .hero-layout { grid-template-columns: minmax(0, 1fr) minmax(230px, .34fr); } }
