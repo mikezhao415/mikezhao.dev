@@ -955,6 +955,22 @@ a:focus-visible {
 .journey-panel .role-meta,
 .journey-panel .journey-list li p { color: var(--ink); }
 
+/* Separate employer / tenure metadata from the role description. */
+.journey-panel .journey-list .role-meta {
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+.journey-panel .journey-list .role-meta + p {
+  margin-top: 15px;
+  padding-left: 13px;
+  border-left: 2px solid var(--line);
+  color: var(--ink);
+  font-weight: 400;
+}
+
 /* Professional examples are editorial entries, not portfolio project cards. */
 .professional-contributions { margin: 0 0 52px; padding: 30px 0 0; border-top: 1px solid var(--line); }
 .contributions-heading { max-width: 760px; }
