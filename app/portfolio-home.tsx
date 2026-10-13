@@ -57,8 +57,8 @@ export function PortfolioHome() {
                 <a className="button-primary" href="#contact">
                   Get in touch
                 </a>
-                <a className="text-link" href="#contact">
-                  Connect
+                <a className="text-link" href="#journey">
+                  View résumé
                 </a>
               </div>
             </div>
