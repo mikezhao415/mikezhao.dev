@@ -54,8 +54,8 @@ export function PortfolioHome() {
                 I build software and explore more reliable ways to work.
               </p>
               <div className="hero-actions">
-                <a className="button-primary" href="#work">
-                  Explore selected work <span aria-hidden="true">↓</span>
+                <a className="button-primary" href="#contact">
+                  Get in touch
                 </a>
                 <a className="text-link" href="#contact">
                   Connect
@@ -72,13 +72,6 @@ export function PortfolioHome() {
             </aside>
           </div>
 
-          <div className="hero-bottomline" aria-hidden="true">
-            <span>INDEPENDENT THINKING</span>
-            <span className="bottomline-rule" />
-            <span>ENGINEERING PRACTICE</span>
-            <span className="bottomline-rule" />
-            <span>CONTINUOUS LEARNING</span>
-          </div>
         </section>
 
         <section className="work-section section-shell" id="work" aria-labelledby="work-title">
@@ -142,7 +135,7 @@ export function PortfolioHome() {
           <div className="career-narrative">
             <p>I started in project management, bringing people, priorities, and delivery together. Earning my PMP in August 2018 strengthened my approach to planning, stakeholder alignment, and execution. Lean Six Sigma reinforced my interest in removing friction and repetitive work.</p>
             <p>At Mitchell International, that interest led from Excel and VBA automation to Oracle SQL, Tableau, analytical data modeling, and reporting architecture. As a Senior Analyst, I developed Power BI expertise through self-directed learning and hands-on delivery.</p>
-            <p>Since my promotion to Principal on September 28, 2026, I am collaborating with my manager and colleagues to explore BI as Code. This is early-stage work; my personal software projects offer another place to learn, experiment, and build.</p>
+            <p>Since my promotion to Principal in September, 2026, I am collaborating with my manager and colleagues to explore BI as Code. This is early-stage work; my personal software projects offer another place to learn, experiment, and build.</p>
           </div>
           <div className="journey-panel">
             <div className="journey-aside">
