@@ -43,21 +43,22 @@ export const experience = [
   },
 ];
 
-export const selectedWork = [
+export const professionalContributions = [
   {
-    category: "Professional analytics · Senior tenure, 2026",
     title: "Making transactional data useful for reporting",
     description:
       "Investigated unfamiliar transactional data, established analytical grain and relationships, and developed a Power BI reporting solution. Documented the design to support team understanding and maintenance.",
     note: "Generalized professional example; implementation details are confidential.",
   },
   {
-    category: "Professional analytics · Senior tenure, 2026",
     title: "Owning a reporting solution from design to delivery",
     description:
       "Designed and delivered reporting for a new product offering, developing SQL transformations and technical documentation to help colleagues understand the solution.",
     note: "Generalized professional example; no customer data or internal architecture is shared.",
   },
+];
+
+export const selectedWork = [
   {
     category: "Current exploration",
     title: "BI as Code",
