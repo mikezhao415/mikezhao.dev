@@ -48,13 +48,11 @@ export const professionalContributions = [
     title: "Making transactional data useful for reporting",
     description:
       "Investigated unfamiliar transactional data, established analytical grain and relationships, and developed a Power BI reporting solution. Documented the design to support team understanding and maintenance.",
-    note: "Generalized professional example; implementation details are confidential.",
   },
   {
     title: "Owning a reporting solution from design to delivery",
     description:
       "Designed and delivered reporting for a new product offering, developing SQL transformations and technical documentation to help colleagues understand the solution.",
-    note: "Generalized professional example; no customer data or internal architecture is shared.",
   },
 ];
 
