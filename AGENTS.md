@@ -56,6 +56,12 @@ Favor evidence and case studies over generic skill lists. Do not expose private 
 - Public certifications are historical entries: show name, issuer, and issue date in reverse chronological order. Do not add expiration/status fields or expired badges to the public content model. The private `mikezhao415/career` repository retains accurate expiration/verification records; removing public labels does not make an expired credential current.
 - Keep the personal website, GitHub profile, and private career master consistent where relevant, while preserving private detail in the career repository. Do not modify unrelated CurrentArray, Coilbay, or First Course Studio repositories.
 
+## Editorial and publication safeguards
+
+- Distinguish professional responsibilities from independent projects. Generalize employer examples; never publish proprietary implementation details, unapproved metrics, customer information, or credential IDs. Professional examples are personal descriptions, not employer endorsements.
+- Present BI as Code as independent exploration, not organization-wide adoption.
+- The secondary hero CTA **My experience** links to the on-page Professional Direction section (`#journey`); do not replace it with a résumé link without a new decision.
+
 ## Validation and deployment lessons (October 2026)
 
 - When writing or appending CSS through connector/API scripts, distinguish actual newline characters from literal backslash-n text. **Never insert literal `\\n` tokens between CSS rules.** This twice caused PostCSS `CssSyntaxError: Unknown word \\n` in Vercel builds.
