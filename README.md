@@ -1,8 +1,10 @@
 # mikezhao.dev
 
-Source for [mikezhao.dev](https://mikezhao.dev), Mike Zhao's personal career and portfolio website.
+The source code for [mikezhao.dev](https://mikezhao.dev), my personal portfolio bringing together experience in data analytics, business intelligence, software engineering, and design.
 
-**Data · Engineering · Design** connects professional analytics and business intelligence work with independent software development and engineering experiments. BI as Code is presented as exploration, not a claim of organization-wide adoption.
+**Data · Engineering · Design**
+
+The site also provides a home for technical experiments exploring modern analytics architectures, BI as Code, and practical applications of software engineering to business problems. These experiments represent independent exploration, not claims of organization-wide adoption.
 
 ## Stack
 
@@ -26,21 +28,17 @@ npm run start
 npm test
 ```
 
-The smoke test checks current public content, fragment links, metadata, structured data, robots, sitemap, favicon, and the 1200 × 630 Open Graph image. It is not a substitute for Lighthouse, accessibility, production HTTP, or social-preview verification.
+The smoke test checks public content, fragment links, metadata, structured data, robots, sitemap, favicon, and the 1200 × 630 Open Graph image. It is not a substitute for Lighthouse, accessibility, production HTTP, or social-preview verification.
 
-## Content
+## Project structure
 
 - `content/portfolio.ts`: experience, selected work, capabilities, and certifications.
 - `app/portfolio-home.tsx`: narrative and section layout; `app/page.tsx`: Person structured data.
 - `app/globals.css`: typography, palette, responsive layout, focus states, and reduced-motion support.
 - `app/layout.tsx`, `app/opengraph-image.tsx`, `app/robots.ts`, and `app/sitemap.ts`: identity and search/social metadata.
 
-Use **month and year only** for public career dates. Show certification names, issuers, and issue dates without public expiration/status labels; maintain accurate private records. Distinguish professional responsibilities from personal projects. Keep employer examples generalized; never add proprietary implementation details, unapproved metrics, customer information, or credential IDs. Professional examples are personal descriptions, not employer endorsements.
-
-The secondary hero CTA **My experience** links to the on-page Professional Direction section (`#journey`); do not replace it with a résumé link without a new decision.
-
 ## Deployment and review
 
-Vercel is the sole production platform through Git integration; `main` is the production branch. PR branches ordinarily create previews. Merging into `main` triggers production deployment.
+Vercel is the production platform through Git integration; `main` is the production branch. Pull requests ordinarily create preview deployments. Merging into `main` triggers production deployment.
 
-Follow `AGENTS.md` for local-assisted and remote validation. Remote PRs use the `remote-validation` label to run the existing Node 22 CI checks.
+See [AGENTS.md](AGENTS.md) for repository conventions and validation workflows. Remote pull requests can use the `remote-validation` label to run Node 22 CI checks.
