@@ -2,7 +2,7 @@
 
 Source for [mikezhao.dev](https://mikezhao.dev), Mike Zhao's personal career and portfolio website.
 
-**Project Delivery · Analytics · Software** connects a career in project management, process improvement, data informatics, and reporting architecture with personal software development. BI as Code is described as an early-stage exploration.
+**Data · Engineering · Design** connects professional analytics and business intelligence work with independent software development and engineering experiments. BI as Code is presented as exploration, not a claim of organization-wide adoption.
 
 ## Stack
 
@@ -26,6 +26,8 @@ npm run start
 npm test
 ```
 
+The smoke test checks current public content, fragment links, metadata, structured data, robots, sitemap, favicon, and the 1200 × 630 Open Graph image. It is not a substitute for Lighthouse, accessibility, production HTTP, or social-preview verification.
+
 ## Content
 
 - `content/portfolio.ts`: experience, selected work, capabilities, and certifications.
@@ -33,10 +35,12 @@ npm test
 - `app/globals.css`: typography, palette, responsive layout, focus states, and reduced-motion support.
 - `app/layout.tsx`, `app/opengraph-image.tsx`, `app/robots.ts`, and `app/sitemap.ts`: identity and search/social metadata.
 
-Preserve exact titles and promotion dates. Label expired credentials accurately and distinguish professional responsibilities from personal projects. Keep employer examples generalized; never add proprietary implementation details, unapproved metrics, customer information, or credential IDs. Professional examples are personal descriptions, not employer endorsements.
+Use **month and year only** for public career dates. Show certification names, issuers, and issue dates without public expiration/status labels; maintain accurate private records. Distinguish professional responsibilities from personal projects. Keep employer examples generalized; never add proprietary implementation details, unapproved metrics, customer information, or credential IDs. Professional examples are personal descriptions, not employer endorsements.
+
+The secondary hero CTA **My experience** links to the on-page Professional Direction section (`#journey`); do not replace it with a résumé link without a new decision.
 
 ## Deployment and review
 
-Vercel is the sole production platform through Git integration; `main` is the production branch. PR branches ordinarily create previews. The integration branch is authorized for Preview deployment; production publication still requires review and approval. Merging into `main` triggers production deployment.
+Vercel is the sole production platform through Git integration; `main` is the production branch. PR branches ordinarily create previews. Merging into `main` triggers production deployment.
 
 Follow `AGENTS.md` for local-assisted and remote validation. Remote PRs use the `remote-validation` label to run the existing Node 22 CI checks.
