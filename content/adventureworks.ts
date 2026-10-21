@@ -1,6 +1,6 @@
 export const project = {
   root: "/projects/adventureworks-analytics",
-  dashboard: "https://adventureworks-analytics-flax.vercel.app/",
+  dashboard: "https://adventureworks.mikezhao.dev/",
   source: "https://github.com/mikezhao415/adventureworks-analytics",
   disclosure: "This independent project uses Microsoft's fictional AdventureWorks 2022 sample data. Results do not represent actual commercial activity. Microsoft is not affiliated with or endorsing this project.",
 };
