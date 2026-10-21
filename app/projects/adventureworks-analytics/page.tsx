@@ -1,6 +1,6 @@
 import { ExternalPageIcon } from "./external-page-icon";
 import type { Metadata } from "next";
-import { ArchitectureDiagram, CaseLinks, EvidenceLink } from "./components";
+import { ArchitectureDiagram, CaseLinks, DashboardScreenshot, EvidenceLink } from "./components";
 import { project } from "../../../content/adventureworks";
 
 export const metadata: Metadata = {
@@ -21,6 +21,7 @@ export default function ProjectOverview() {
     <section className="case-section section-shell"><p className="case-eyebrow">02 / Experiment</p><h2>A transactional database. A modern analytical workflow.</h2><p>Using Microsoft&apos;s fictional AdventureWorks 2022 sample database, I built a workflow that extracts sales data, organizes it into analytical models, validates business metrics and publishes an interactive dashboard.</p><p>The emphasis is correctness, traceability and repeatable execution—not an unmeasured claim of faster reporting or reduced costs.</p></section>
     <section className="case-section section-shell"><p className="case-eyebrow">03 / Architecture</p><h2>Separate the responsibilities. Verify the handoffs.</h2><ArchitectureDiagram /></section>
     <section className="case-section section-shell"><p className="case-eyebrow">04 / Outcome</p><h2>A working system with verifiable results.</h2><p>The project includes 23 real-source dbt models, documented sales metric contracts, independent reconciliation and a publicly accessible dashboard. The deployed application consumes a reviewed, precomputed aggregate artifact rather than a live analytical database.</p><EvidenceLink href={project.source + "/blob/main/README.md"}>Review the implementation and evidence</EvidenceLink></section>
-    <section className="case-section section-shell"><p className="case-eyebrow">05 / Explore</p><h2>Two perspectives on one system.</h2><CaseLinks /></section>
+    <section className="case-section section-shell"><p className="case-eyebrow">05 / Dashboard</p><h2>From validated models to a usable view.</h2><p>These are genuine captures of the published dashboard, based on the historical AdventureWorks 2022 sample. The deployed site serves a reviewed aggregate rather than querying a live database.</p><DashboardScreenshot view="overview" /><DashboardScreenshot view="trends" /></section>
+    <section className="case-section section-shell"><p className="case-eyebrow">06 / Explore</p><h2>Two perspectives on one system.</h2><CaseLinks /></section>
   </>;
 }
