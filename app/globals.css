@@ -1031,3 +1031,8 @@ a:focus-visible {
   .case-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .case-architecture li { grid-template-columns:36px 1fr; padding:16px; }
 }
+
+/* External-page links use a consistent SVG icon, not an arrow character. */
+.external-page-icon { display:inline-block; width:1em; height:1em; vertical-align:-.12em; margin-left:.3em; flex:none; }
+.case-actions a, .case-evidence-link, .case-footer a { text-decoration-thickness:1px; text-underline-offset:4px; }
+.case-actions a:focus-visible, .case-evidence-link:focus-visible, .case-footer a:focus-visible, .case-nav a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
