@@ -16,7 +16,7 @@ export default function CaseStudyLayout({ children }: Readonly<{ children: React
     <main id="case-main">{children}</main>
     <footer className="case-footer section-shell">
       <p>{project.disclosure}</p>
-      <div><Link href="/">Back to portfolio</Link><a href={project.dashboard} target="_blank" rel="noopener noreferrer">Live dashboard <ExternalPageIcon /></a><a href={project.source} target="_blank" rel="noopener noreferrer">Source on GitHub <ExternalPageIcon /></a></div>
+      <div><Link href="/">Back to portfolio</Link><a href={project.dashboard} target="_blank" rel="noopener noreferrer">Interactive dashboard <ExternalPageIcon /></a><a href={project.source} target="_blank" rel="noopener noreferrer">Source on GitHub <ExternalPageIcon /></a></div>
     </footer>
   </div>;
 }
