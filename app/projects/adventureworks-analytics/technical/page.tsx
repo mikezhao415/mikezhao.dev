@@ -1,0 +1,25 @@
+import type { Metadata } from "next";
+import { ArchitectureDiagram, EvidenceLink } from "../components";
+import { project } from "../../../../content/adventureworks";
+export const metadata: Metadata = {
+  title: "Technical Implementation | AdventureWorks Analytics | Mike Zhao",
+  description: "A reproducible SQL Server, Python, Parquet, DuckDB and dbt analytics workflow with independent validation and a Next.js dashboard.",
+  alternates: { canonical: project.root + "/technical" },
+};
+const docs = project.source + "/blob/main/docs/";
+const sections = [
+  { label:"01 / Architecture", title:"Design around explicit boundaries", text:"I separated source extraction, analytical modeling, validation and publication so each stage could be inspected independently. SQL Server supplies the historical fictional source; the deployed Next.js application consumes a reviewed aggregate rather than hosting the pipeline.", link:"README.md", root:true },
+  { label:"02 / Extraction", title:"Capture a traceable snapshot", text:"Read-only Python extraction from nine contracted AdventureWorks tables produces local Parquet snapshots and manifests. Validation checks source relationships and recorded totals before the analytical layer consumes a snapshot.", link:"adventureworks-extraction.md" },
+  { label:"03 / Modeling", title:"Make metric definitions explicit", text:"The real-source dbt implementation contains 23 models across staging, six dimensions, two facts and six sales marts. Its metric contracts distinguish shipped-order eligibility, monetary precision and non-additive product/category order counts.", link:"dimensional-modeling.md" },
+  { label:"04 / Quality", title:"Test the data, not only the code", text:"A transformation can execute without producing correct business results. I combined dbt model checks with independent Python reconciliation against Parquet inputs, and used regression and deliberate corruption tests to exercise selected failure paths.", link:"quality-automation.md" },
+  { label:"05 / Publication", title:"Publish a reviewed artifact, not a live database", text:"The public dashboard uses a pinned AdventureWorks 2022-derived aggregate with fail-closed source validation. SQL Server backups, raw snapshots and DuckDB databases are not deployed. The dashboard is a historical snapshot, not a live reporting service.", link:"sales-dashboard.md" },
+  { label:"06 / Reproduction", title:"Make the work inspectable", text:"The repository distinguishes a dashboard-only local run from the full-source pipeline, which requires obtaining Microsoft's sample database and creating local snapshots. The repository documents prerequisites, commands, validation and limitations; a consolidated reproduction guide is part of the remaining publication work.", link:"README.md", root:true },
+  { label:"07 / Limitations", title:"Be precise about what is proven", text:"The dataset describes a fictional business. The project is not a production benchmark, an ROI study, or a demonstration of live ingestion. The reviewed aggregate has a conditional redistribution assessment; asset-specific licensing certainty is not claimed.", link:"data-redistribution.md" },
+];
+export default function TechnicalCase() {
+  return <><section className="case-hero section-shell"><p className="case-eyebrow">Technical perspective / AdventureWorks Analytics</p><h1>Engineering analytics as a reproducible system<span>.</span></h1><p className="case-lead">I built and validated a modular workflow from transactional extraction to modeled sales metrics, automated quality gates and a published dashboard.</p></section>
+  <section className="case-section section-shell"><h2>System architecture</h2><ArchitectureDiagram /></section>
+  <section className="case-section section-shell"><p className="case-eyebrow">Historical extraction validation</p><h2>Evidence at the source boundary.</h2><div className="case-metrics"><div><strong>31,465</strong><span>Sales orders</span></div><div><strong>121,317</strong><span>Order lines</span></div><div><strong>0</strong><span>Duplicate lines</span></div><div><strong>0</strong><span>Orphan lines</span></div></div><p className="case-caption">Historical extraction baseline; these are not current dashboard filter totals.</p></section>
+  {sections.map(s=><section className="case-section section-shell" key={s.label}><p className="case-eyebrow">{s.label}</p><h2>{s.title}</h2><p>{s.text}</p><EvidenceLink href={s.root?project.source + "/blob/main/" + s.link:docs+s.link}>Read supporting documentation</EvidenceLink></section>)}
+  <section className="case-section section-shell"><h2>See the published result.</h2><p>Explore historical AdventureWorks sales metrics with documented definitions and sample-data provenance.</p><EvidenceLink href={project.dashboard}>Open the live dashboard</EvidenceLink></section></>;
+}
