@@ -1,3 +1,4 @@
+import { ExternalPageIcon } from "./external-page-icon";
 import Link from "next/link";
 import { architecture, project } from "../../../content/adventureworks";
 
@@ -19,5 +20,5 @@ export function CaseLinks() {
   </div>;
 }
 export function EvidenceLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return <a className="case-evidence-link" href={href} target="_blank" rel="noopener noreferrer">{children} ↗</a>;
+  return <a className="case-evidence-link" href={href} target="_blank" rel="noopener noreferrer">{children} <ExternalPageIcon /></a>;
 }
