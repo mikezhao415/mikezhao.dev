@@ -1036,3 +1036,11 @@ a:focus-visible {
 .external-page-icon { display:inline-block; width:1em; height:1em; vertical-align:-.12em; margin-left:.3em; flex:none; }
 .case-actions a, .case-evidence-link, .case-footer a { text-decoration-thickness:1px; text-underline-offset:4px; }
 .case-actions a:focus-visible, .case-evidence-link:focus-visible, .case-footer a:focus-visible, .case-nav a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+
+/* Authentic AdventureWorks dashboard captures: readable, responsive, and without distortion. */
+.case-dashboard-figure { margin: 36px 0 44px; max-width: 1100px; min-width: 0; }
+.case-dashboard-frame { overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+.case-dashboard-frame img { display: block; width: 100%; height: auto; }
+.case-dashboard-figure figcaption { margin-top: 14px; max-width: 850px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.case-dashboard-figure figcaption strong { color: var(--ink); }
+@media (max-width: 700px) { .case-dashboard-figure { margin: 24px 0 34px; } }
