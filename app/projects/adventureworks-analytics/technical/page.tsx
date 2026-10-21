@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArchitectureDiagram, EvidenceLink } from "../components";
+import { ArchitectureDiagram, DashboardScreenshot, EvidenceLink } from "../components";
 import { project } from "../../../../content/adventureworks";
 export const metadata: Metadata = {
   title: "Technical Implementation | AdventureWorks Analytics | Mike Zhao",
@@ -21,5 +21,6 @@ export default function TechnicalCase() {
   <section className="case-section section-shell"><h2>System architecture</h2><ArchitectureDiagram /></section>
   <section className="case-section section-shell"><p className="case-eyebrow">Historical extraction validation</p><h2>Evidence at the source boundary.</h2><div className="case-metrics"><div><strong>31,465</strong><span>Sales orders</span></div><div><strong>121,317</strong><span>Order lines</span></div><div><strong>0</strong><span>Duplicate lines</span></div><div><strong>0</strong><span>Orphan lines</span></div></div><p className="case-caption">Historical extraction baseline; these are not current dashboard filter totals.</p></section>
   {sections.map(s=><section className="case-section section-shell" key={s.label}><p className="case-eyebrow">{s.label}</p><h2>{s.title}</h2><p>{s.text}</p><EvidenceLink href={s.root?project.source + "/blob/main/" + s.link:docs+s.link}>{s.linkLabel}</EvidenceLink></section>)}
+  <section className="case-section section-shell"><p className="case-eyebrow">Published artifact</p><h2>Inspect the final reporting output.</h2><p>The captured Sales Trends view illustrates how the validated, precomputed sales metrics are presented. This is historical sample data, not a live-ingestion demonstration.</p><DashboardScreenshot view="trends" /></section>
   <section className="case-section section-shell"><h2>See the published result.</h2><p>Explore historical AdventureWorks sales metrics with documented definitions and sample-data provenance.</p><EvidenceLink href={project.dashboard}>Open the live dashboard</EvidenceLink></section></>;
 }
