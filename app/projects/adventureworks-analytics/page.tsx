@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArchitectureDiagram, CaseLinks, EvidenceLink } from "./components";
-import { project } from "../../content/adventureworks";
+import { project } from "../../../content/adventureworks";
 
 export const metadata: Metadata = {
   title: "AdventureWorks Analytics | Mike Zhao",
