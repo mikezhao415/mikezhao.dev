@@ -58,11 +58,13 @@ export const professionalContributions = [
 
 export const selectedWork = [
   {
-    category: "Current exploration",
-    title: "BI as Code",
+    category: "Independent analytics engineering project",
+    title: "AdventureWorks Analytics",
     description:
-      "Exploring how version control, modularity, automated validation, and repeatable delivery can improve analytics development. I am starting this conversation with my manager and colleagues.",
-    note: "Early-stage exploration; organization-wide adoption is not claimed.",
+      "An end-to-end BI-as-Code case study demonstrating reproducible extraction, analytical modeling, automated validation, and interactive reporting.",
+    note: "Built with fictional Microsoft AdventureWorks 2022 sample data.",
+    href: "/projects/adventureworks-analytics",
+    linkLabel: "Explore the case study",
   },
   {
     category: "Personal software project",

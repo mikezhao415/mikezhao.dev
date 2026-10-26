@@ -16,7 +16,7 @@ for (const expected of [
   'Management Science', 'mailto:hello@mikezhao.dev',
   'https://www.linkedin.com/in/mikezhao415/',
   'https://github.com/mikezhao415/mikezhao.dev',
-  'Early-stage exploration', 'Get in touch', 'My experience',
+  'This work is at an early stage.', 'Get in touch', 'My experience',
 ]) {
   assert.ok(html.includes(expected), `Missing retained content: ${expected}`);
 }

@@ -83,6 +83,8 @@ Apply these rules to future website copy, project descriptions, case studies, an
 - Public certifications are historical entries: show name, issuer, and issue date in reverse chronological order. Do not add expiration/status fields or expired badges to the public content model. The private `mikezhao415/career` repository retains accurate expiration/verification records; removing public labels does not make an expired credential current.
 - Keep the personal website, GitHub profile, and private career master consistent where relevant, while preserving private detail in the career repository. Do not modify unrelated CurrentArray, Coilbay, or First Course Studio repositories.
 
+- For links that open a new browser tab or external page, use the accessible external-page icon (square with outgoing arrow), not a plain diagonal arrow glyph such as ↗. The icon must be decorative (aria-hidden), while the link text supplies its accessible name. Use consistent sizing/alignment and preserve visible keyboard focus. Ordinary same-site navigation should not use the external-page icon.
+
 ## Editorial and publication safeguards
 
 - Distinguish professional responsibilities from independent projects. Generalize employer examples; never publish proprietary implementation details, unapproved metrics, customer information, or credential IDs. Professional examples are personal descriptions, not employer endorsements.

@@ -1,0 +1,24 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { project } from "../../../../content/adventureworks";
+import { EvidenceLink } from "../components";
+export const metadata: Metadata = {
+  title: "The Business Case for Better Analytics | Mike Zhao",
+  description: "Why an analytical layer can improve the consistency and maintainability of reporting—and what the AdventureWorks experiment does and does not prove.",
+  alternates: { canonical: project.root + "/business" },
+};
+const sections = [
+  ["01 / The challenge", "The hidden complexity behind reporting", "A dashboard may be the visible deliverable, but the hardest work often happens before it: interpreting operational records, defining consistent metrics and validating the resulting numbers. As more reports are built independently, similar business rules can be implemented in different ways."],
+  ["02 / Operational versus analytical", "Different systems, different jobs", "Transactional systems are designed to record and manage business events. Analytical questions often need broader historical views, reusable groupings and repeatable calculations. Direct reporting on transactional tables can be appropriate, but it may also leave each report responsible for its own joins, filters and definitions."],
+  ["03 / Architectural response", "Give analytical work its own layer", "I explored a workflow that extracts a controlled snapshot, transforms it into documented analytical models and validates the results before publication. The purpose is not to replace operational systems; it is to give analytical workloads a distinct, inspectable path from source records to reporting outputs."],
+  ["04 / Potential benefits", "Consistency is an engineering outcome", "Centralized metric definitions and version-controlled transformations can provide a stronger foundation for consistent reporting. Automated tests can catch selected integrity or reconciliation failures before publication. These are potential architectural benefits, not guaranteed improvements in speed, cost or business outcomes."],
+  ["05 / Evidence", "What the experiment actually demonstrates", "The implemented AdventureWorks workflow produces Parquet snapshots, DuckDB/dbt analytical models, independent reconciliation and a dashboard based on a reviewed aggregate export. This demonstrates a functioning approach to analytical delivery; it does not establish comparative ROI, production scale or a measured reduction in transactional database load."],
+  ["06 / Trade-offs", "A separate layer introduces responsibilities", "Data freshness must be defined and communicated. Snapshots, orchestration, governance, ownership and recovery require deliberate design. A new analytical layer can be the wrong trade-off for small or infrequent reporting workloads, and the additional operational complexity must be justified."],
+  ["07 / Next questions", "A foundation for further evaluation", "I would evaluate this architecture further with representative workloads, freshness requirements, operational monitoring and measurable reporting outcomes. Those experiments remain future work, not claims about the current project."],
+];
+export default function BusinessCase() {
+  return <><section className="case-hero section-shell"><p className="case-eyebrow">Business perspective / AdventureWorks Analytics</p><h1>Better analytics starts before the dashboard<span>.</span></h1><p className="case-lead">I explored how a dedicated analytical layer can make reporting more consistent, maintainable and verifiable—while recognizing the operational costs and trade-offs.</p></section>
+  <section className="case-section section-shell"><h2>Two ways to organize reporting</h2><div className="case-compare"><div><h3>Direct transactional reporting</h3><p>Operational tables → report-specific SQL → individual reports</p><p>Useful for some workloads, but metric logic and validation may be repeated across reports.</p></div><div><h3>Analytical-layer approach</h3><p>Operational tables → tested analytical models → reusable reporting datasets</p><p>Separates responsibilities and supports shared definitions, with additional pipeline and freshness considerations.</p></div></div><p className="case-caption">Conceptual comparison, not a measured benchmark.</p></section>
+  {sections.map(([label,title,body])=><section className="case-section section-shell" key={label}><p className="case-eyebrow">{label}</p><h2>{title}</h2><p>{body}</p></section>)}
+  <section className="case-section section-shell"><h2>Explore the implementation.</h2><p>The technical walkthrough connects these ideas to source files, metric contracts and validation evidence.</p><Link className="case-evidence-link" href={project.root + "/technical"}>Read the technical perspective →</Link><EvidenceLink href={project.dashboard}>Explore the interactive dashboard</EvidenceLink></section></>;
+}
