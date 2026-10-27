@@ -16,7 +16,7 @@ jobs:
       contains(github.event.pull_request.labels.*.name, 'remote-validation')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -25,3 +25,21 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
+      - name: Audit locked dependencies (all)
+        if: always()
+        run: |
+          npm audit --json > npm-audit-all.json || true
+      - name: Audit locked production dependencies
+        if: always()
+        run: |
+          npm audit --omit=dev --json > npm-audit-production.json || true
+      - name: Upload dependency audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit
+          path: |
+            npm-audit-all.json
+            npm-audit-production.json
+          if-no-files-found: error
+          retention-days: 14
