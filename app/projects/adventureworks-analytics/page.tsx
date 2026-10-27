@@ -1,14 +1,12 @@
 import { ExternalPageIcon } from "./external-page-icon";
-import type { Metadata } from "next";
+import { createCaseStudyMetadata } from "./metadata";
 import { ArchitectureDiagram, CaseLinks, DashboardScreenshot, EvidenceLink } from "./components";
 import { project } from "../../../content/adventureworks";
 
-export const metadata: Metadata = {
-  title: "AdventureWorks Analytics | Mike Zhao",
-  description: "An independent BI-as-Code case study: transactional extraction, tested analytical models, reconciliation and a published sales dashboard.",
-  alternates: { canonical: project.root },
-  openGraph: { title: "AdventureWorks Analytics | Mike Zhao", description: "From transactional data to trusted analytics.", url: project.root },
-};
+const title = "AdventureWorks Analytics | Mike Zhao";
+const description = "An independent BI-as-Code case study: transactional extraction, tested analytical models, reconciliation and a published sales dashboard.";
+
+export const metadata = createCaseStudyMetadata(title, description, project.root);
 export default function ProjectOverview() {
   return <>
     <section className="case-hero section-shell">

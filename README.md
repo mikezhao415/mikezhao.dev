@@ -24,11 +24,11 @@ npm run lint
 npm run typecheck
 npm run build
 npm run start
-# In another terminal, check the running production server:
+# In another terminal, check the running production server at http://127.0.0.1:3000:
 npm test
 ```
 
-The smoke test checks public content, fragment links, metadata, structured data, robots, sitemap, favicon, and the 1200 × 630 Open Graph image. It is not a substitute for Lighthouse, accessibility, production HTTP, or social-preview verification.
+The smoke test defaults to `http://127.0.0.1:3000`. Set `PORTFOLIO_TEST_URL` to check a server running at a different address. It checks homepage content and fragment links, all three AdventureWorks case-study routes and their canonical and social metadata, structured data, robots, explicit sitemap entries, favicon, and the 1200 x 630 Open Graph image. It is not a substitute for Lighthouse, accessibility, production HTTP, or social-preview verification.
 
 ## Project structure
 

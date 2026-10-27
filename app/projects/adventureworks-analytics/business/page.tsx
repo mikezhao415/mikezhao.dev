@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
+import { createCaseStudyMetadata } from "../metadata";
 import Link from "next/link";
 import { project } from "../../../../content/adventureworks";
 import { EvidenceLink } from "../components";
-export const metadata: Metadata = {
-  title: "The Business Case for Better Analytics | Mike Zhao",
-  description: "Why an analytical layer can improve the consistency and maintainability of reporting—and what the AdventureWorks experiment does and does not prove.",
-  alternates: { canonical: project.root + "/business" },
-};
+const title = "The Business Case for Better Analytics | Mike Zhao";
+const description = "Why an analytical layer can improve the consistency and maintainability of reporting, and what the AdventureWorks experiment does and does not prove.";
+
+export const metadata = createCaseStudyMetadata(title, description, project.root + "/business");
 const sections = [
   ["01 / The challenge", "The hidden complexity behind reporting", "A dashboard may be the visible deliverable, but the hardest work often happens before it: interpreting operational records, defining consistent metrics and validating the resulting numbers. As more reports are built independently, similar business rules can be implemented in different ways."],
   ["02 / Operational versus analytical", "Different systems, different jobs", "Transactional systems are designed to record and manage business events. Analytical questions often need broader historical views, reusable groupings and repeatable calculations. Direct reporting on transactional tables can be appropriate, but it may also leave each report responsible for its own joins, filters and definitions."],
