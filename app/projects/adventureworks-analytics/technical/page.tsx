@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
+import { createCaseStudyMetadata } from "../metadata";
 import { ArchitectureDiagram, DashboardScreenshot, EvidenceLink } from "../components";
 import { project } from "../../../../content/adventureworks";
-export const metadata: Metadata = {
-  title: "Technical Implementation | AdventureWorks Analytics | Mike Zhao",
-  description: "A reproducible SQL Server, Python, Parquet, DuckDB and dbt analytics workflow with independent validation and a Next.js dashboard.",
-  alternates: { canonical: project.root + "/technical" },
-};
+const title = "Technical Implementation | AdventureWorks Analytics | Mike Zhao";
+const description = "A reproducible SQL Server, Python, Parquet, DuckDB and dbt analytics workflow with independent validation and a Next.js dashboard.";
+
+export const metadata = createCaseStudyMetadata(title, description, project.root + "/technical");
 const docs = project.source + "/blob/main/docs/";
 const sections = [
   { label:"01 / Architecture", title:"Design around explicit boundaries", text:"I separated source extraction, analytical modeling, validation and publication so each stage could be inspected independently. SQL Server supplies the historical fictional source; the deployed Next.js application consumes a reviewed aggregate rather than hosting the pipeline.", link:"README.md", root:true, linkLabel:"Read architecture and project overview" },
@@ -13,7 +12,7 @@ const sections = [
   { label:"03 / Modeling", title:"Make metric definitions explicit", text:"The real-source dbt implementation contains 23 models across staging, six dimensions, two facts and six sales marts. Its metric contracts distinguish shipped-order eligibility, monetary precision and non-additive product/category order counts.", link:"dimensional-modeling.md", linkLabel:"Read dimensional modeling documentation" },
   { label:"04 / Quality", title:"Test the data, not only the code", text:"A transformation can execute without producing correct business results. I combined dbt model checks with independent Python reconciliation against Parquet inputs, and used regression and deliberate corruption tests to exercise selected failure paths.", link:"quality-automation.md", linkLabel:"Read quality and reconciliation documentation" },
   { label:"05 / Publication", title:"Publish a reviewed artifact, not a live database", text:"The public dashboard uses a pinned AdventureWorks 2022-derived aggregate with fail-closed source validation. SQL Server backups, raw snapshots and DuckDB databases are not deployed. The dashboard is a historical snapshot, not a live reporting service.", link:"sales-dashboard.md", linkLabel:"Read dashboard publication documentation" },
-  { label:"06 / Reproduction", title:"Make the work inspectable", text:"The repository distinguishes a dashboard-only local run from the full-source pipeline, which requires obtaining Microsoft's sample database and creating local snapshots. The repository documents prerequisites, commands, validation and limitations; a consolidated reproduction guide is part of the remaining publication work.", link:"README.md", root:true, linkLabel:"Read repository reproduction instructions" },
+  { label:"06 / Reproduction", title:"Make the work inspectable", text:"The repository distinguishes a dashboard-only local run from the full-source pipeline, which requires obtaining Microsoft's sample database and creating local snapshots. The published reproducibility guide documents both paths, their prerequisites, commands, validation and limitations. A fresh full-source run is separate from this documentation.", link:"reproducibility.md", linkLabel:"Read the reproducibility guide" },
   { label:"07 / Limitations", title:"Be precise about what is proven", text:"The dataset describes a fictional business. The project is not a production benchmark, an ROI study, or a demonstration of live ingestion. The reviewed aggregate has a conditional redistribution assessment; asset-specific licensing certainty is not claimed.", link:"data-redistribution.md", linkLabel:"Read data provenance and redistribution policy" },
 ];
 export default function TechnicalCase() {

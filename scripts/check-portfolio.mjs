@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 
-const base = process.env.PORTFOLIO_TEST_URL || 'http://127.0.0.1:3100';
+const base = process.env.PORTFOLIO_TEST_URL || 'http://127.0.0.1:3000';
 const fetchRoute = async (path) => {
   const response = await fetch(new URL(path, base));
   assert.equal(response.status, 200, path);
+  assert.equal(response.headers.get('x-content-type-options'), 'nosniff', `${path}: nosniff`);
+  assert.equal(response.headers.get('referrer-policy'), 'strict-origin-when-cross-origin', `${path}: referrer policy`);
   return response;
 };
 
@@ -16,7 +18,9 @@ for (const expected of [
   'Management Science', 'mailto:hello@mikezhao.dev',
   'https://www.linkedin.com/in/mikezhao415/',
   'https://github.com/mikezhao415/mikezhao.dev',
-  'This work is at an early stage.', 'Get in touch', 'My experience',
+  'This work is at an early stage.', 'Independent analytics engineering project',
+  'Built with fictional Microsoft AdventureWorks 2022 sample data.',
+  'Get in touch', 'My experience',
 ]) {
   assert.ok(html.includes(expected), `Missing retained content: ${expected}`);
 }
@@ -40,14 +44,92 @@ assert.ok(match, 'Person structured data is missing');
 const identity = JSON.parse(match[1]);
 assert.equal(identity['@type'], 'Person');
 assert.equal(identity.jobTitle, 'Principal Data Informatics Analyst');
+const caseRoutes = [
+  {
+    path: '/projects/adventureworks-analytics',
+    title: 'AdventureWorks Analytics | Mike Zhao',
+    description: 'An independent BI-as-Code case study: transactional extraction, tested analytical models, reconciliation and a published sales dashboard.',
+    content: ['From transactional data to trusted analytics', '23 real-source dbt models', 'Two perspectives on one system'],
+  },
+  {
+    path: '/projects/adventureworks-analytics/business',
+    title: 'The Business Case for Better Analytics | Mike Zhao',
+    description: 'Why an analytical layer can improve the consistency and maintainability of reporting, and what the AdventureWorks experiment does and does not prove.',
+    content: ['Better analytics starts before the dashboard', 'Conceptual comparison, not a measured benchmark.', 'What the experiment actually demonstrates'],
+  },
+  {
+    path: '/projects/adventureworks-analytics/technical',
+    title: 'Technical Implementation | AdventureWorks Analytics | Mike Zhao',
+    description: 'A reproducible SQL Server, Python, Parquet, DuckDB and dbt analytics workflow with independent validation and a Next.js dashboard.',
+    content: ['Engineering analytics as a reproducible system', '31,465', '121,317', 'Historical extraction baseline'],
+  },
+];
+// Read attributes independently of tag attribute order and decode HTML metadata.
+const decodeAttribute = (value) => value.replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1], decodeAttribute(match[2])]));
+for (const route of caseRoutes) {
+  const routeHtml = await (await fetchRoute(route.path)).text();
+  assert.equal((routeHtml.match(/<h1\b/g) || []).length, 1, `${route.path}: one h1`);
+  assert.equal(decodeAttribute(routeHtml.match(/<title>(.*?)<\/title>/s)?.[1] || ''), route.title, `${route.path}: HTML title`);
+  for (const content of route.content) {
+    assert.ok(routeHtml.includes(content), `${route.path}: missing ${content}`);
+  }
+  const metaTags = [...routeHtml.matchAll(/<meta\b[^>]*>/g)].map(([tag]) => attributes(tag));
+  const meta = (key) => {
+    const matches = metaTags.filter((tag) => tag.name === key || tag.property === key);
+    assert.equal(matches.length, 1, `${route.path}: exactly one ${key}`);
+    assert.ok(matches[0].content, `${route.path}: nonempty ${key}`);
+    return matches[0].content;
+  };
+  const canonical = [...routeHtml.matchAll(/<link\b[^>]*>/g)].map(([tag]) => attributes(tag)).filter((tag) => tag.rel === 'canonical');
+  assert.equal(canonical.length, 1, `${route.path}: one canonical`);
+  assert.equal(canonical[0].href, `https://mikezhao.dev${route.path}`);
+  assert.equal(meta('og:url'), canonical[0].href);
+  assert.equal(meta('og:title'), route.title);
+  assert.equal(meta('twitter:title'), route.title);
+  assert.equal(meta('description'), route.description);
+  assert.equal(meta('og:description'), route.description);
+  assert.equal(meta('twitter:description'), meta('description'));
+  assert.equal(meta('twitter:card'), 'summary_large_image');
+  for (const key of ['og:image', 'twitter:image']) {
+    const imageUrl = new URL(meta(key));
+    assert.equal(imageUrl.origin, 'https://mikezhao.dev');
+    assert.equal(imageUrl.pathname, '/opengraph-image');
+  }
+  assert.equal(meta('og:image:width'), '1200');
+  assert.equal(meta('og:image:height'), '630');
+  if (route.path.endsWith('/technical')) {
+    assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/reproducibility.md'));
+    assert.ok(routeHtml.includes('The published reproducibility guide documents both paths'));
+    assert.ok(routeHtml.includes('A fresh full-source run is separate from this documentation.'));
+    assert.ok(!routeHtml.includes('a consolidated reproduction guide is part of the remaining publication work'));
+  }
+  meta('og:image:alt');
+  meta('twitter:image:alt');
+}
 const sitemap = await (await fetchRoute('/sitemap.xml')).text();
-assert.ok(sitemap.includes('https://mikezhao.dev'));
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url);
+assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, 'Sitemap entries must be unique');
+for (const expected of ['https://mikezhao.dev', ...caseRoutes.map(({ path }) => `https://mikezhao.dev${path}`)]) {
+  assert.ok(sitemapUrls.includes(expected), `Missing sitemap entry: ${expected}`);
+}
 const robots = await (await fetchRoute('/robots.txt')).text();
 assert.ok(robots.includes('https://mikezhao.dev/sitemap.xml'));
-const image = Buffer.from(await (await fetchRoute('/opengraph-image')).arrayBuffer());
+const imageResponse = await fetchRoute('/opengraph-image');
+assert.match(imageResponse.headers.get('content-type') || '', /^image\/png/);
+const image = Buffer.from(await imageResponse.arrayBuffer());
 assert.equal(image.toString('ascii', 1, 4), 'PNG');
 assert.equal(image.readUInt32BE(16), 1200);
 assert.equal(image.readUInt32BE(20), 630);
 const icon = await (await fetchRoute('/icon.svg')).text();
 assert.ok(icon.includes('#202b26'));
-console.log('Portfolio content, links, metadata, structured data, and SEO routes passed.');
+for (const [pattern, type] of [
+  [/<script[^>]+src="([^"]+)"/, /javascript/],
+  [/<link\b(?=[^>]*rel="stylesheet")[^>]*href="([^"]+)"/, /text\/css/],
+]) {
+  const asset = html.match(pattern)?.[1];
+  assert.ok(asset, `Missing emitted asset: ${type}`);
+  const response = await fetchRoute(decodeAttribute(asset));
+  assert.match(response.headers.get('content-type') || '', type);
+}
+console.log('Portfolio and AdventureWorks content, metadata, images, sitemap, headers and asset MIME types passed.');
