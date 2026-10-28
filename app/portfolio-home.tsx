@@ -205,11 +205,6 @@ export function PortfolioHome() {
         </section>
       </main>
 
-      <footer className="site-footer section-shell">
-        <a className="wordmark footer-wordmark" href="#top"><span className="wordmark-mark" aria-hidden="true">M</span><span>Mike Zhao</span></a>
-        <span>Built with care in San Diego, California.</span>
-        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
-      </footer>
     </>
   );
 }
