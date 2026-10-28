@@ -196,14 +196,16 @@ export function PortfolioHome() {
 
         <section className="practice-section section-shell" id="capabilities" aria-labelledby="capabilities-title">
           <div className="section-heading"><div><p className="eyebrow">04 / Capabilities</p><h2 id="capabilities-title">Experience across disciplines.</h2></div></div>
-          <div className="project-grid">
-            {capabilities.map((group) => (
-              <article className="project-card project-body capability-card" key={group.title}>
-                <h3>{group.title}</h3><p>{group.description}</p>
-                <ul className="tech-list capability-skills">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
-              </article>
+          <ol className="capability-list">
+            {capabilities.map((group, index) => (
+              <li className="capability-group" key={group.title}>
+                <h3><span className="capability-index" aria-hidden="true">{String(index + 1).padStart(2, "0")} / </span>{group.title}</h3>
+                <ul className="capability-skills" aria-label={`${group.title} skills`}>
+                  {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                </ul>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
         <section className="practice-section section-shell" id="credentials" aria-labelledby="credentials-title">
           <div className="section-heading"><div><p className="eyebrow">05 / Foundations & continued learning</p><h2 id="credentials-title">Education & certifications.</h2></div></div>

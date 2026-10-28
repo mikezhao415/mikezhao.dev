@@ -912,7 +912,6 @@ a:focus-visible {
 .career-narrative { max-width: 850px; margin-bottom: 36px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .career-narrative p + p { margin-top: 16px; }
 .current-role { display: inline-block; margin-left: 10px; color: var(--accent); font-size: 14px; letter-spacing: 0; }
-.capability-skills { margin-top: 20px; }
 .project-body > .project-note { margin-top: 14px; min-height: 0; font-size: 14px; }
 .education { padding: 24px 0; border-top: 1px solid var(--line); }
 .education h3, .credential-list h3 { margin: 0; font-size: 18px; letter-spacing: -0.035em; }
@@ -936,8 +935,6 @@ a:focus-visible {
 .hero-note { align-self: start; min-height: 220px; }
 .note-label { margin-top: 0; }
 .editorial-callout { max-width: 330px; padding: 18px 20px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--ink); font-size: 16px; font-weight: 500; line-height: 1.55; }
-.capability-card { border-top: 5px solid var(--ink); background: var(--surface); }
-.capability-card:hover { border-top-color: var(--accent); }
 .contact-email-label { margin-top: 20px; padding-top: 20px; width: 100%; border-top: 1px solid var(--muted); }
 .contact-action > .contact-email { font-size: clamp(17px, 2vw, 22px); overflow-wrap: anywhere; }
 @media (min-width: 781px) { .hero-layout { grid-template-columns: minmax(0, 1fr) minmax(230px, .34fr); } }
@@ -1045,6 +1042,7 @@ a:focus-visible {
 .header-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .wordmark-logo { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
 .wordmark-title { font-size: 14px; font-weight: 700; letter-spacing: -.035em; line-height: 1.4; }
+.header-navigation { display: flex; align-items: center; }
 .shared-nav { width: auto; }
 .shared-nav a { padding-block: 12px; }
 .shared-nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 7px; }
@@ -1057,8 +1055,21 @@ a:focus-visible {
 .site-footer, .case-footer { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
 @media (max-width: 700px) {
   .shared-header { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 8px 10px; }
+  .header-navigation { position: relative; align-self: center; }
   .nav-toggle { display: grid; }
-  .shared-header .shared-nav { display: none; grid-column: 1 / -1; width: 100%; flex-direction: column; align-items: stretch; gap: 0; padding-top: 8px; border-top: 1px solid var(--line); }
+  .shared-header .shared-nav { display: none; position: absolute; top: calc(100% + 8px); right: 0; z-index: 4; width: min(210px, calc(100vw - 2 * var(--page-gutter))); max-height: calc(100dvh - 100px); overflow-y: auto; flex-direction: column; align-items: stretch; gap: 0; padding: 8px; border: 1px solid var(--line); background: var(--surface); }
   .shared-header .shared-nav[data-open="true"] { display: flex; }
-  .shared-nav a { min-height: 44px; display: flex; align-items: center; }
+  .shared-nav a { padding: 10px 14px; min-height: 44px; display: flex; align-items: center; }
+}
+
+/* Editorial capability groups preserve the ordered inventory without card chrome. */
+.capability-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.capability-group { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.5fr); gap: 24px 48px; padding-block: 32px; border-top: 1px solid var(--line); }
+.capability-group h3 { margin: 0; font-size: clamp(21px, 2.2vw, 28px); font-weight: 700; line-height: 1.35; letter-spacing: -.035em; }
+.capability-index { color: var(--accent); font-size: 14px; font-weight: 600; letter-spacing: .04em; white-space: nowrap; }
+.capability-skills { display: flex; flex-wrap: wrap; align-content: start; gap: 6px 0; list-style: none; margin: 0; padding: 0; font-size: 16px; line-height: 1.8; color: var(--muted); }
+.capability-skills li { display: inline; }
+.capability-skills li:not(:last-child)::after { content: " / "; white-space: pre; padding-inline: 8px; color: var(--line); }
+@media (max-width: 700px) {
+  .capability-group { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-block: 26px; }
 }

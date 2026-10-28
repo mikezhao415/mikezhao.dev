@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 const title = "Mike Zhao | Data · Engineering · Design";
 const description =
-  "Explore Mike Zhao's work across data, engineering, and design—from analytics and systems to software development and digital experiences.";
+  "Explore Mike Zhao's professional analytics experience and independent software projects, including AdventureWorks Analytics, a published BI-as-Code case study.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mikezhao.dev"),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/opengraph-image"],
+    images: [{ url: "/opengraph-image", alt: "Mike Zhao: From data analysis to software development." }],
     title,
     description,
   },

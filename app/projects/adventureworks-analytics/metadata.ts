@@ -5,7 +5,7 @@ const socialImage = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "Mike Zhao: Where analytical thinking meets creative execution.",
+  alt: "Mike Zhao: From data analysis to software development.",
 };
 
 export function createCaseStudyMetadata(

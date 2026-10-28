@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Mike Zhao — Where analytical thinking meets creative execution.";
+  "Mike Zhao: From data analysis to software development.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -54,7 +54,7 @@ export default function Image() {
             lineHeight: 1.08,
           }}
         >
-          Where analytical thinking meets creative execution.
+          From data analysis to software development.
         </div>
       </div>
 

@@ -113,8 +113,20 @@ test("all routes reflow at mobile, desktop, and a 200% zoom equivalent width", a
         const titleBox = (await title.boundingBox())!;
         const toggleBox = (await toggle.boundingBox())!;
         expect(titleBox.x + titleBox.width).toBeLessThanOrEqual(toggleBox.x);
+        const heroBefore = await page.locator("main").boundingBox();
+        const headerBefore = await header.boundingBox();
         await toggle.click();
-        await expect(page.getByRole("navigation")).toBeVisible();
+        const nav = page.getByRole("navigation");
+        await expect(nav).toBeVisible();
+        const menuBox = (await nav.boundingBox())!;
+        expect(Math.abs(menuBox.x + menuBox.width - toggleBox.x - toggleBox.width)).toBeLessThan(1);
+        expect(menuBox.y - toggleBox.y - toggleBox.height).toBeCloseTo(8, 0);
+        expect(menuBox.width).toBeGreaterThanOrEqual(190);
+        expect(menuBox.width).toBeLessThanOrEqual(220);
+        expect(menuBox.x).toBeGreaterThanOrEqual(0);
+        expect(menuBox.x + menuBox.width).toBeLessThanOrEqual(width);
+        expect(await page.locator("main").boundingBox()).toEqual(heroBefore);
+        expect(await header.boundingBox()).toEqual(headerBefore);
       }
     }
   }
@@ -129,4 +141,30 @@ test("navigation remains available without JavaScript", async ({ browser }) => {
     await expect(page.getByRole("button", { name: "Navigation menu" })).toBeHidden();
   }
   await context.close();
+});
+
+
+test("capabilities retain the complete ordered inventory in editorial rows", async ({ page }) => {
+  const groups = [
+    ["Data & Analytics", ["Python", "Oracle SQL", "Power BI", "Tableau", "Excel & VBA", "Query optimization"]],
+    ["Analytics Engineering", ["dbt", "DuckDB", "Dimensional modeling", "SQL transformations", "Data quality & reconciliation", "Data pipelines", "Reporting architecture", "Technical documentation"]],
+    ["Software Development", ["Next.js & React", "TypeScript", "Tailwind CSS", "Git", "Automated testing", "GitHub Actions & CI/CD", "AI-assisted development"]],
+    ["Delivery & Leadership", ["Project management", "Stakeholder collaboration", "Process improvement", "Technical ownership", "Team training", "Knowledge transfer"]],
+  ] as const;
+  for (const width of [320, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const section = page.locator("#capabilities");
+    await expect(section.locator(".capability-group")).toHaveCount(4);
+    await expect(section.locator(".project-card, .tech-list, p:not(.eyebrow)")).toHaveCount(0);
+    for (const [index, [title, skills]] of groups.entries()) {
+      const row = section.locator(".capability-group").nth(index);
+      await expect(row.getByRole("heading", { level: 3 })).toHaveText(`${String(index + 1).padStart(2, "0")} / ${title}`);
+      await expect(row.locator(".capability-skills li")).toHaveText([...skills]);
+      const headingBox = (await row.locator("h3").boundingBox())!;
+      const skillsBox = (await row.locator("ul").boundingBox())!;
+      if (width <= 700) expect(skillsBox.y).toBeGreaterThan(headingBox.y + headingBox.height);
+      else expect(skillsBox.x).toBeGreaterThan(headingBox.x + headingBox.width);
+    }
+  }
 });

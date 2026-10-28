@@ -80,7 +80,6 @@ export const selectedWork = [
 export const capabilities = [
   {
     title: "Data & Analytics",
-    description: "Professional analytics and reporting experience, complemented by independent data engineering projects.",
     skills: [
       "Python",
       "Oracle SQL",
@@ -92,8 +91,6 @@ export const capabilities = [
   },
   {
     title: "Analytics Engineering",
-    description:
-      "Reporting architecture from professional work, extended through an independent data engineering project.",
     skills: [
       "dbt",
       "DuckDB",
@@ -107,7 +104,6 @@ export const capabilities = [
   },
   {
     title: "Software Development",
-    description: "Independent applications, automated testing, and delivery workflows.",
     skills: [
       "Next.js & React",
       "TypeScript",
@@ -120,7 +116,6 @@ export const capabilities = [
   },
   {
     title: "Delivery & Leadership",
-    description: "A project-management foundation applied to technical work.",
     skills: [
       "Project management",
       "Stakeholder collaboration",

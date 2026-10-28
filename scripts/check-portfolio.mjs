@@ -10,6 +10,9 @@ const fetchRoute = async (path) => {
 };
 
 const html = await (await fetchRoute('/')).text();
+const approvedDescription = "Explore Mike Zhao's professional analytics experience and independent software projects, including AdventureWorks Analytics, a published BI-as-Code case study.";
+const socialAlt = "Mike Zhao: From data analysis to software development.";
+
 assert.equal((html.match(/<h1\b/g) || []).length, 1);
 for (const expected of [
   'Project Management Professional (PMP)', 'AWS Certified Cloud Practitioner',
@@ -70,6 +73,14 @@ const caseRoutes = [
 // Read attributes independently of tag attribute order and decode HTML metadata.
 const decodeAttribute = (value) => value.replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1], decodeAttribute(match[2])]));
+const homeMetadata = [...html.matchAll(/<meta\b[^>]*>/g)].map(([tag]) => attributes(tag));
+for (const key of ['description', 'og:description', 'twitter:description']) {
+  assert.equal(homeMetadata.find(tag => tag.name === key || tag.property === key)?.content, approvedDescription);
+}
+assert.equal(homeMetadata.find(tag => tag.property === 'og:image:alt')?.content, socialAlt);
+assert.equal(homeMetadata.find(tag => tag.name === 'twitter:image:alt')?.content, socialAlt);
+assert.ok(html.includes('class="capability-list"'));
+assert.ok(!html.includes('capability-card'));
 for (const route of caseRoutes) {
   const routeHtml = await (await fetchRoute(route.path)).text();
   const eyebrow = route.path.endsWith('/business') ? 'Business perspective' : route.path.endsWith('/technical') ? 'Technical perspective' : 'BI-AS-CODE';
@@ -113,8 +124,8 @@ for (const route of caseRoutes) {
     assert.ok(routeHtml.includes('A fresh full-source run is separate from this documentation.'));
     assert.ok(!routeHtml.includes('a consolidated reproduction guide is part of the remaining publication work'));
   }
-  meta('og:image:alt');
-  meta('twitter:image:alt');
+  assert.equal(meta('og:image:alt'), socialAlt);
+  assert.equal(meta('twitter:image:alt'), socialAlt);
 }
 const sitemap = await (await fetchRoute('/sitemap.xml')).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url);

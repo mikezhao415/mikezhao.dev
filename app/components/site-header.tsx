@@ -68,20 +68,22 @@ function HeaderContent({ variant, pathname }: { variant: keyof typeof navigation
         </Link>
         <Link className="wordmark-title" href={isProject ? project.root : "/"} onClick={() => setOpen(false)}>{title}</Link>
       </div>
-      <button ref={toggle} type="button" className="nav-toggle" aria-label="Navigation menu"
-        aria-expanded={open} aria-controls="primary-navigation" onClick={() => setOpen(!open)}>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
-          <path d={open ? "M6 6l12 12M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"} />
-        </svg>
-      </button>
-      <nav id="primary-navigation" className="site-nav shared-nav" data-open={open}
-        aria-label={isProject ? "Project navigation" : "Main navigation"}>
-        {navigation[variant].map(({ label, href }) => (
-          <Link key={href} href={href} aria-current={isProject && pathname === href ? "page" : undefined}
-            className={href === "#contact" ? "nav-contact" : undefined} onClick={() => setOpen(false)}>{label}</Link>
-        ))}
-      </nav>
-      <noscript><style>{`.shared-header .nav-toggle{display:none}.shared-header .shared-nav{display:flex}`}</style></noscript>
+      <div className="header-navigation">
+        <button ref={toggle} type="button" className="nav-toggle" aria-label="Navigation menu"
+          aria-expanded={open} aria-controls="primary-navigation" onClick={() => setOpen(!open)}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
+            <path d={open ? "M6 6l12 12M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
+        <nav id="primary-navigation" className="site-nav shared-nav" data-open={open}
+          aria-label={isProject ? "Project navigation" : "Main navigation"}>
+          {navigation[variant].map(({ label, href }) => (
+            <Link key={href} href={href} aria-current={isProject && pathname === href ? "page" : undefined}
+              className={href === "#contact" ? "nav-contact" : undefined} onClick={() => setOpen(false)}>{label}</Link>
+          ))}
+        </nav>
+      </div>
+      <noscript><style>{`.shared-header .nav-toggle{display:none}.shared-header .header-navigation{grid-column:1/-1}.shared-header .shared-nav{display:flex;position:static;width:100%;max-height:none}`}</style></noscript>
     </header>
   );
 }
