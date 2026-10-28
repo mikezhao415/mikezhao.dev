@@ -1,3 +1,5 @@
+import { SiteHeader } from "./components/site-header";
+import { ExternalPageIcon } from "./components/external-page-icon";
 import { capabilities, certifications, experience, professionalContributions, selectedWork } from "../content/portfolio";
 
 const projects = selectedWork.map((item, index) => ({
@@ -25,18 +27,7 @@ export function PortfolioHome() {
       </a>
 
       <div id="top" aria-hidden="true" />
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Mike Zhao, home">
-          <span className="wordmark-mark" aria-hidden="true">M</span>
-          <span>Mike Zhao</span>
-        </a>
-        <nav className="site-nav" aria-label="Main navigation">
-          <a href="#work">Work</a>
-          <a href="#journey">Journey</a>
-          <a href="#practice">Practice</a>
-          <a className="nav-contact" href="#contact">Get in touch</a>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main id="main-content">
         <section className="hero section-shell" aria-labelledby="hero-title">
@@ -114,7 +105,7 @@ export function PortfolioHome() {
                   <p className="project-note">{project.note}</p>
                   {project.href && (
                     <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
-                      {project.linkLabel}
+                      {project.linkLabel}{project.href.startsWith("http") && <ExternalPageIcon />}
                     </a>
                   )}
                 </div>
@@ -135,7 +126,7 @@ export function PortfolioHome() {
           <div className="career-narrative">
             <p>I started in project management, bringing people, priorities, and delivery together. Earning my PMP in August 2018 strengthened my approach to planning, stakeholder alignment, and execution. Lean Six Sigma reinforced my interest in removing friction and repetitive work.</p>
             <p>At Mitchell International, that interest led from Excel and VBA automation to Oracle SQL, Tableau, analytical data modeling, and reporting architecture. As a Senior Analyst, I developed Power BI expertise through self-directed learning and hands-on delivery.</p>
-            <p>Since my promotion to Principal in September, 2026, I am collaborating with my manager and colleagues to explore BI as Code. This is early-stage work; my personal software projects offer another place to learn, experiment, and build.</p>
+            <p>I became a Principal Data Informatics Analyst in September 2026. Alongside my professional analytics work, I explore BI as Code through independent projects, including AdventureWorks Analytics.</p>
           </div>
           <section className="professional-contributions" aria-labelledby="contributions-title">
             <div className="contributions-heading">
@@ -179,7 +170,7 @@ export function PortfolioHome() {
           <div className="section-heading">
             <div>
               <p className="eyebrow">03 / Technical practice</p>
-              <h2 id="practice-title">Tools are the means.<br />Good systems are the point.</h2>
+              <h2 id="practice-title">Tools are the means. Good systems are the point.</h2>
             </div>
             <p className="section-intro editorial-callout">The practices behind the work, plus the stack powering this site.</p>
           </div>
@@ -234,9 +225,9 @@ export function PortfolioHome() {
             <div className="contact-action">
               <span className="contact-label">FIND ME ON</span>
               <a href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer" aria-label="Mike Zhao on GitHub">
-                GitHub
+                GitHub <ExternalPageIcon />
               </a>
-              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn <ExternalPageIcon /></a>
               <span className="contact-label contact-email-label">GET IN TOUCH</span>
               <a className="contact-email" href="mailto:hello@mikezhao.dev">hello@mikezhao.dev</a>
               <span className="contact-location">San Diego, CA · Pacific Time</span>

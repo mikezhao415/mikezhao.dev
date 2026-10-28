@@ -18,7 +18,7 @@ for (const expected of [
   'Management Science', 'mailto:hello@mikezhao.dev',
   'https://www.linkedin.com/in/mikezhao415/',
   'https://github.com/mikezhao415/mikezhao.dev',
-  'This work is at an early stage.', 'Independent analytics engineering project',
+  'Separately, I explore BI as Code through independent projects.', 'Independent analytics engineering project',
   'Built with fictional Microsoft AdventureWorks 2022 sample data.',
   'Get in touch', 'My experience',
 ]) {
@@ -31,6 +31,9 @@ assert.ok(html.includes('href="#journey"') && html.includes('My experience'));
 assert.ok(html.includes('href="#contact"') && html.includes('Get in touch'));
 assert.ok(html.includes('/icon.svg'));
 assert.ok(!html.includes('https://github.com/mikezhao415/bi-as-code'));
+assert.ok(!html.includes('Python coursework'));
+assert.ok(html.includes('Building at the intersection of data and software.'));
+assert.ok(html.includes('I built a reproducible analytics pipeline using Python, dbt, and DuckDB, with automated validation and a published dashboard.'));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) {
   assert.ok(html.includes(`id="${match[1]}"`), `Broken anchor: ${match[1]}`);
 }
@@ -69,6 +72,12 @@ const decodeAttribute = (value) => value.replace(/&quot;/g, '"').replace(/&#x27;
 const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1], decodeAttribute(match[2])]));
 for (const route of caseRoutes) {
   const routeHtml = await (await fetchRoute(route.path)).text();
+  const eyebrow = route.path.endsWith('/business') ? 'Business perspective' : route.path.endsWith('/technical') ? 'Technical perspective' : 'BI-AS-CODE';
+  assert.ok(routeHtml.includes(`<p class="case-eyebrow">${eyebrow}</p>`), `${route.path}: hero eyebrow`);
+  assert.ok(routeHtml.includes('https://adventureworks.mikezhao.dev/'));
+  for (const [, target] of routeHtml.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(routeHtml.includes(`id="${target}"`), `${route.path}: broken fragment ${target}`);
+  }
   assert.equal((routeHtml.match(/<h1\b/g) || []).length, 1, `${route.path}: one h1`);
   assert.equal(decodeAttribute(routeHtml.match(/<title>(.*?)<\/title>/s)?.[1] || ''), route.title, `${route.path}: HTML title`);
   for (const content of route.content) {
@@ -100,7 +109,7 @@ for (const route of caseRoutes) {
   assert.equal(meta('og:image:height'), '630');
   if (route.path.endsWith('/technical')) {
     assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/reproducibility.md'));
-    assert.ok(routeHtml.includes('The published reproducibility guide documents both paths'));
+    assert.ok(routeHtml.includes('The reproduction guide separates running the dashboard locally'));
     assert.ok(routeHtml.includes('A fresh full-source run is separate from this documentation.'));
     assert.ok(!routeHtml.includes('a consolidated reproduction guide is part of the remaining publication work'));
   }

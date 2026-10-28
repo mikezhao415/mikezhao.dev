@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { BackToTop } from "./components/back-to-top";
 import { Analytics } from "@vercel/analytics/next";
 
 const title = "Mike Zhao | Data · Engineering · Design";
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         {children}
+        <BackToTop />
         <Analytics />
       </body>
     </html>

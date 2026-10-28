@@ -4,7 +4,7 @@ export const experience = [
     company: "Mitchell International",
     dates: "September 2026–present",
     detail:
-      "Collaborating with my manager and colleagues to explore BI as Code: version control, modular development, testing, and repeatable delivery for analytics. This work is at an early stage.",
+      "My current role builds on my professional analytics and reporting experience. Separately, I explore BI as Code through independent projects.",
   },
   {
     title: "Senior Data Informatics Analyst",
@@ -61,7 +61,7 @@ export const selectedWork = [
     category: "Independent analytics engineering project",
     title: "AdventureWorks Analytics",
     description:
-      "An end-to-end BI-as-Code case study demonstrating reproducible extraction, analytical modeling, automated validation, and interactive reporting.",
+      "I built a reproducible analytics pipeline using Python, dbt, and DuckDB, with automated validation and a published dashboard.",
     note: "Built with fictional Microsoft AdventureWorks 2022 sample data.",
     href: "/projects/adventureworks-analytics",
     linkLabel: "Explore the case study",
@@ -80,39 +80,41 @@ export const selectedWork = [
 export const capabilities = [
   {
     title: "Data & Analytics",
-    description: "Professional reporting and analytical problem-solving.",
+    description: "Professional analytics and reporting experience, complemented by independent data engineering projects.",
     skills: [
-      "Power BI",
+      "Python",
       "Oracle SQL",
+      "Power BI",
       "Tableau",
       "Excel & VBA",
-      "Data modeling",
       "Query optimization",
-      "Python coursework",
     ],
   },
   {
     title: "Analytics Engineering",
     description:
-      "Practices developed through technical ownership of reporting.",
+      "Reporting architecture from professional work, extended through an independent data engineering project.",
     skills: [
-      "Reporting architecture",
+      "dbt",
+      "DuckDB",
+      "Dimensional modeling",
       "SQL transformations",
-      "Reusable SQL patterns",
-      "Reporting verification",
-      "Process automation",
+      "Data quality & reconciliation",
+      "Data pipelines",
+      "Reporting architecture",
       "Technical documentation",
     ],
   },
   {
     title: "Software Development",
-    description: "Personal projects and continued learning.",
+    description: "Independent applications, automated testing, and delivery workflows.",
     skills: [
       "Next.js & React",
       "TypeScript",
       "Tailwind CSS",
       "Git",
-      "Automated validation & CI/CD",
+      "Automated testing",
+      "GitHub Actions & CI/CD",
       "AI-assisted development",
     ],
   },

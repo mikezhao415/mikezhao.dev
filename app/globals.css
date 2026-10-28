@@ -987,11 +987,8 @@ a:focus-visible {
 
 /* AdventureWorks editorial case study — inherits the portfolio palette. */
 .case-study { color: var(--ink); }
-.case-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; padding-top:25px; padding-bottom:25px; border-bottom:1px solid var(--line); }
-.case-wordmark { font-weight:750; font-size:22px; letter-spacing:-.055em; }
-.case-wordmark span, .case-hero h1 span { color:var(--accent); }
-.case-nav { display:flex; flex-wrap:wrap; gap:clamp(12px,3vw,30px); font-size:15px; }
-.case-nav a:hover, .case-footer a:hover { color:var(--accent); }
+.case-hero h1 span { color: var(--accent); }
+.case-footer a:hover { color: var(--accent); }
 .case-hero { padding-top:clamp(70px,10vw,140px); padding-bottom:clamp(65px,9vw,115px); }
 .case-eyebrow { text-transform:uppercase; font-size:12px; font-weight:700; letter-spacing:.13em; color:var(--accent); margin-bottom:20px; }
 .case-hero h1 { max-width:1000px; font-size:clamp(44px,8vw,100px); letter-spacing:-.075em; line-height:1.04; }
@@ -1025,8 +1022,6 @@ a:focus-visible {
 .case-footer p { max-width:800px; font-size:13px; line-height:1.7; color:var(--muted); }
 .case-footer div { display:flex; flex-wrap:wrap; gap:16px 26px; margin-top:25px; font-weight:600; }
 @media(max-width:700px) {
-  .case-header { align-items:flex-start; }
-  .case-nav { width:100%; }
   .case-link-grid,.case-compare { grid-template-columns:minmax(0,1fr); }
   .case-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .case-architecture li { grid-template-columns:36px 1fr; padding:16px; }
@@ -1035,7 +1030,7 @@ a:focus-visible {
 /* External-page links use a consistent SVG icon, not an arrow character. */
 .external-page-icon { display:inline-block; width:1em; height:1em; vertical-align:-.12em; margin-left:.3em; flex:none; }
 .case-actions a, .case-evidence-link, .case-footer a { text-decoration-thickness:1px; text-underline-offset:4px; }
-.case-actions a:focus-visible, .case-evidence-link:focus-visible, .case-footer a:focus-visible, .case-nav a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.case-actions a:focus-visible, .case-evidence-link:focus-visible, .case-footer a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
 
 /* Authentic AdventureWorks dashboard captures: readable, responsive, and without distortion. */
 .case-dashboard-figure { margin: 36px 0 44px; max-width: 1100px; min-width: 0; }
@@ -1044,3 +1039,26 @@ a:focus-visible {
 .case-dashboard-figure figcaption { margin-top: 14px; max-width: 850px; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .case-dashboard-figure figcaption strong { color: var(--ink); }
 @media (max-width: 700px) { .case-dashboard-figure { margin: 24px 0 34px; } }
+
+/* Shared contextual navigation and long-page controls use the existing theme. */
+.shared-header { flex-wrap: wrap; gap: 12px 24px; padding-block: 16px; }
+.header-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.wordmark-logo { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
+.wordmark-title { font-size: 14px; font-weight: 700; letter-spacing: -.035em; line-height: 1.4; }
+.shared-nav { width: auto; }
+.shared-nav a { padding-block: 12px; }
+.shared-nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 7px; }
+.nav-toggle, .back-to-top { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; flex: none; }
+.nav-toggle { display: none; }
+.nav-toggle:focus-visible, .back-to-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+.back-to-top { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 3; border-color: var(--deep); background: var(--deep); color: var(--signal); }
+.back-to-top:hover { background: var(--ink); }
+.back-to-top[hidden] { display: none; }
+.site-footer, .case-footer { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
+@media (max-width: 700px) {
+  .shared-header { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 8px 10px; }
+  .nav-toggle { display: grid; }
+  .shared-header .shared-nav { display: none; grid-column: 1 / -1; width: 100%; flex-direction: column; align-items: stretch; gap: 0; padding-top: 8px; border-top: 1px solid var(--line); }
+  .shared-header .shared-nav[data-open="true"] { display: flex; }
+  .shared-nav a { min-height: 44px; display: flex; align-items: center; }
+}
