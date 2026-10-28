@@ -9,16 +9,6 @@ const projects = selectedWork.map((item, index) => ({
   visual: item.title === "This portfolio" ? "portfolio" : "bi",
 }));
 
-const practices = [
-  "Version control",
-  "Automated testing",
-  "CI / CD",
-  "Reusable metrics",
-  "Code-driven analytics",
-];
-
-const technologies = ["Next.js", "React", "TypeScript", "Tailwind CSS"];
-
 export function PortfolioHome() {
   return (
     <>
@@ -166,49 +156,26 @@ export function PortfolioHome() {
           </div>
         </section>
 
-        <section className="practice-section section-shell" id="practice" aria-labelledby="practice-title">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">03 / Technical practice</p>
-              <h2 id="practice-title">Tools are the means. Good systems are the point.</h2>
-            </div>
-            <p className="section-intro editorial-callout">The practices behind the work, plus the stack powering this site.</p>
-          </div>
-
-          <div className="practice-content">
-            <div className="practice-group">
-              <p className="practice-label">Analytics engineering</p>
-              <ul className="practice-list">
-                {practices.map((practice, index) => (
-                  <li key={practice}><span>0{index + 1}</span>{practice}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="practice-group tech-group">
-              <p className="practice-label">Current site stack</p>
-              <ul className="tech-list">
-                {technologies.map((technology) => <li key={technology}>{technology}</li>)}
-              </ul>
-
-            </div>
-          </div>
-        </section>
-
         <section className="practice-section section-shell" id="capabilities" aria-labelledby="capabilities-title">
-          <div className="section-heading"><div><p className="eyebrow">04 / Capabilities</p><h2 id="capabilities-title">Experience across disciplines.</h2></div></div>
-          <ol className="capability-list">
-            {capabilities.map((group, index) => (
+          <div id="practice" className="anchor-alias" aria-hidden="true" />
+          <div className="section-heading"><div><p className="eyebrow">03 / Capabilities</p><h2 id="capabilities-title">Skills grounded in practice.</h2></div></div>
+          <div className="capability-principles">
+            <h3>Engineering practice</h3>
+            <p>I use version control to keep changes reviewable, automated testing to check my work, and CI/CD to make validation and delivery repeatable. In analytics projects, I define reusable metrics and keep transformation logic in code.</p>
+          </div>
+          <ul className="capability-list" role="list">
+            {capabilities.map((group) => (
               <li className="capability-group" key={group.title}>
-                <h3><span className="capability-index" aria-hidden="true">{String(index + 1).padStart(2, "0")} / </span>{group.title}</h3>
+                <h3>{group.title}</h3>
                 <ul className="capability-skills" aria-label={`${group.title} skills`}>
                   {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
                 </ul>
               </li>
             ))}
-          </ol>
+          </ul>
         </section>
         <section className="practice-section section-shell" id="credentials" aria-labelledby="credentials-title">
-          <div className="section-heading"><div><p className="eyebrow">05 / Foundations & continued learning</p><h2 id="credentials-title">Education & certifications.</h2></div></div>
+          <div className="section-heading"><div><p className="eyebrow">04 / Foundations & continued learning</p><h2 id="credentials-title">Education & certifications.</h2></div></div>
           <div className="education"><h3>University of California, San Diego</h3><p>BS, Management Science · 2014</p></div>
           <ul className="credential-list">
             {certifications.map((item) => (
@@ -220,7 +187,7 @@ export function PortfolioHome() {
         <section className="contact-section section-shell" id="contact" aria-labelledby="contact-title">
           <div className="contact-card">
             <div className="contact-copy">
-              <p className="eyebrow">06 / Contact</p>
+              <p className="eyebrow">05 / Contact</p>
               <h2 id="contact-title">Good work starts with a conversation<span>.</span></h2>
               <p>I&apos;m interested in thoughtful teams, useful problems, and the space where analytics meets software.</p>
             </div>

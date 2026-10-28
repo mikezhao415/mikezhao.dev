@@ -18,7 +18,7 @@ test("contextual brands, exact active pages, and navigation destinations", async
         await expect(header.getByRole("link", { name: label, exact: true })).toHaveAttribute("href", href);
       }
     } else {
-      for (const [label, href] of [["Work", "#work"], ["Journey", "#journey"], ["Practice", "#practice"], ["Get in touch", "#contact"]]) {
+      for (const [label, href] of [["Work", "#work"], ["Journey", "#journey"], ["Capabilities", "#capabilities"], ["Get in touch", "#contact"]]) {
         await expect(header.getByRole("link", { name: label, exact: true })).toHaveAttribute("href", href);
       }
       await expect(page.getByRole("link", { name: "My experience" })).toHaveAttribute("href", "#journey");
@@ -99,7 +99,7 @@ for (const reducedMotion of ["reduce", "no-preference"] as const) {
 }
 
 test("all routes reflow at mobile, desktop, and a 200% zoom equivalent width", async ({ page }) => {
-  for (const width of [320, 640, 700, 701, 1440]) {
+  for (const width of [320, 375, 480, 640, 700, 701, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
       await page.goto(route);
@@ -119,7 +119,17 @@ test("all routes reflow at mobile, desktop, and a 200% zoom equivalent width", a
         const nav = page.getByRole("navigation");
         await expect(nav).toBeVisible();
         const menuBox = (await nav.boundingBox())!;
-        expect(Math.abs(menuBox.x + menuBox.width - toggleBox.x - toggleBox.width)).toBeLessThan(1);
+        const buttonAfter = (await toggle.boundingBox())!;
+        const containingBlock = await nav.evaluate(el => {
+          const parent = (el as HTMLElement).offsetParent as HTMLElement;
+          const rect = parent.getBoundingClientRect();
+          return { className: parent.className, x: rect.x, y: rect.y, width: rect.width, height: rect.height, position: getComputedStyle(el).position };
+        });
+        expect(containingBlock.className).toBe("header-navigation");
+        expect(containingBlock.position).toBe("absolute");
+        expect(containingBlock.x + containingBlock.width).toBeCloseTo(buttonAfter.x + buttonAfter.width, 0);
+        expect(containingBlock.y + containingBlock.height).toBeCloseTo(buttonAfter.y + buttonAfter.height, 0);
+        expect(Math.abs(menuBox.x + menuBox.width - buttonAfter.x - buttonAfter.width)).toBeLessThan(1);
         expect(menuBox.y - toggleBox.y - toggleBox.height).toBeCloseTo(8, 0);
         expect(menuBox.width).toBeGreaterThanOrEqual(190);
         expect(menuBox.width).toBeLessThanOrEqual(220);
@@ -156,15 +166,33 @@ test("capabilities retain the complete ordered inventory in editorial rows", asy
     await page.goto("/");
     const section = page.locator("#capabilities");
     await expect(section.locator(".capability-group")).toHaveCount(4);
-    await expect(section.locator(".project-card, .tech-list, p:not(.eyebrow)")).toHaveCount(0);
+    await expect(section.locator(".project-card, .tech-list, .capability-index")).toHaveCount(0);
+    await expect(page.locator("section#practice")).toHaveCount(0);
+    await expect(section.getByRole("heading", { name: "Engineering practice" })).toBeVisible();
+    await expect(section.locator(".capability-principles")).toContainText("reusable metrics");
+    await expect(page.getByText("Current site stack", { exact: true })).toHaveCount(0);
     for (const [index, [title, skills]] of groups.entries()) {
       const row = section.locator(".capability-group").nth(index);
-      await expect(row.getByRole("heading", { level: 3 })).toHaveText(`${String(index + 1).padStart(2, "0")} / ${title}`);
+      await expect(row.getByRole("heading", { level: 3 })).toHaveText(title);
       await expect(row.locator(".capability-skills li")).toHaveText([...skills]);
       const headingBox = (await row.locator("h3").boundingBox())!;
       const skillsBox = (await row.locator("ul").boundingBox())!;
       if (width <= 700) expect(skillsBox.y).toBeGreaterThan(headingBox.y + headingBox.height);
       else expect(skillsBox.x).toBeGreaterThan(headingBox.x + headingBox.width);
+    }
+  }
+});
+
+
+test("external-page icons remain decorative and preserve accessible link names", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: "Mike Zhao on GitHub", exact: true })).toBeVisible();
+  for (const route of ["/", root]) {
+    await page.goto(route);
+    for (const icon of await page.locator('a[target="_blank"] .external-page-icon').all()) {
+      await expect(icon).toHaveAttribute("aria-hidden", "true");
+      await expect(icon).toHaveAttribute("focusable", "false");
+      await expect(icon).toHaveAttribute("stroke-width", "1.8");
     }
   }
 });

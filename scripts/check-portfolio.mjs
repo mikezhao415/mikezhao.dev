@@ -80,6 +80,11 @@ for (const key of ['description', 'og:description', 'twitter:description']) {
 assert.equal(homeMetadata.find(tag => tag.property === 'og:image:alt')?.content, socialAlt);
 assert.equal(homeMetadata.find(tag => tag.name === 'twitter:image:alt')?.content, socialAlt);
 assert.ok(html.includes('class="capability-list"'));
+assert.ok(html.includes('03 / Capabilities') && html.includes('04 / Foundations') && html.includes('05 / Contact'));
+assert.ok(html.includes('href="#capabilities"') && html.includes('id="practice"'));
+assert.ok(html.includes('I use version control to keep changes reviewable'));
+assert.ok(!html.includes('Current site stack') && !html.includes('03 / Technical practice'));
+assert.ok(!html.includes('capability-index'));
 assert.ok(!html.includes('capability-card'));
 for (const route of caseRoutes) {
   const routeHtml = await (await fetchRoute(route.path)).text();

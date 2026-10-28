@@ -9,7 +9,7 @@ const navigation = {
   portfolio: [
     { label: "Work", href: "#work" },
     { label: "Journey", href: "#journey" },
-    { label: "Practice", href: "#practice" },
+    { label: "Capabilities", href: "#capabilities" },
     { label: "Get in touch", href: "#contact" },
   ],
   adventureworks: [
@@ -83,7 +83,7 @@ function HeaderContent({ variant, pathname }: { variant: keyof typeof navigation
           ))}
         </nav>
       </div>
-      <noscript><style>{`.shared-header .nav-toggle{display:none}.shared-header .header-navigation{grid-column:1/-1}.shared-header .shared-nav{display:flex;position:static;width:100%;max-height:none}`}</style></noscript>
+      <noscript><style>{`.shared-header .nav-toggle{display:none}.shared-header .header-navigation{grid-column:1/-1;width:100%}.shared-header .shared-nav{display:flex;position:static;width:100%;max-height:none}`}</style></noscript>
     </header>
   );
 }
