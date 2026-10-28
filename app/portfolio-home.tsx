@@ -1,3 +1,5 @@
+import { SiteHeader } from "./components/site-header";
+import { ExternalPageIcon } from "./components/external-page-icon";
 import { capabilities, certifications, experience, professionalContributions, selectedWork } from "../content/portfolio";
 
 const projects = selectedWork.map((item, index) => ({
@@ -7,16 +9,6 @@ const projects = selectedWork.map((item, index) => ({
   visual: item.title === "This portfolio" ? "portfolio" : "bi",
 }));
 
-const practices = [
-  "Version control",
-  "Automated testing",
-  "CI / CD",
-  "Reusable metrics",
-  "Code-driven analytics",
-];
-
-const technologies = ["Next.js", "React", "TypeScript", "Tailwind CSS"];
-
 export function PortfolioHome() {
   return (
     <>
@@ -25,18 +17,7 @@ export function PortfolioHome() {
       </a>
 
       <div id="top" aria-hidden="true" />
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Mike Zhao, home">
-          <span className="wordmark-mark" aria-hidden="true">M</span>
-          <span>Mike Zhao</span>
-        </a>
-        <nav className="site-nav" aria-label="Main navigation">
-          <a href="#work">Work</a>
-          <a href="#journey">Journey</a>
-          <a href="#practice">Practice</a>
-          <a className="nav-contact" href="#contact">Get in touch</a>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main id="main-content">
         <section className="hero section-shell" aria-labelledby="hero-title">
@@ -114,7 +95,7 @@ export function PortfolioHome() {
                   <p className="project-note">{project.note}</p>
                   {project.href && (
                     <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
-                      {project.linkLabel}
+                      {project.linkLabel}{project.href.startsWith("http") && <ExternalPageIcon />}
                     </a>
                   )}
                 </div>
@@ -135,7 +116,7 @@ export function PortfolioHome() {
           <div className="career-narrative">
             <p>I started in project management, bringing people, priorities, and delivery together. Earning my PMP in August 2018 strengthened my approach to planning, stakeholder alignment, and execution. Lean Six Sigma reinforced my interest in removing friction and repetitive work.</p>
             <p>At Mitchell International, that interest led from Excel and VBA automation to Oracle SQL, Tableau, analytical data modeling, and reporting architecture. As a Senior Analyst, I developed Power BI expertise through self-directed learning and hands-on delivery.</p>
-            <p>Since my promotion to Principal in September, 2026, I am collaborating with my manager and colleagues to explore BI as Code. This is early-stage work; my personal software projects offer another place to learn, experiment, and build.</p>
+            <p>I became a Principal Data Informatics Analyst in September 2026. Alongside my professional analytics work, I explore BI as Code through independent projects, including AdventureWorks Analytics.</p>
           </div>
           <section className="professional-contributions" aria-labelledby="contributions-title">
             <div className="contributions-heading">
@@ -175,47 +156,26 @@ export function PortfolioHome() {
           </div>
         </section>
 
-        <section className="practice-section section-shell" id="practice" aria-labelledby="practice-title">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">03 / Technical practice</p>
-              <h2 id="practice-title">Tools are the means.<br />Good systems are the point.</h2>
-            </div>
-            <p className="section-intro editorial-callout">The practices behind the work, plus the stack powering this site.</p>
-          </div>
-
-          <div className="practice-content">
-            <div className="practice-group">
-              <p className="practice-label">Analytics engineering</p>
-              <ul className="practice-list">
-                {practices.map((practice, index) => (
-                  <li key={practice}><span>0{index + 1}</span>{practice}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="practice-group tech-group">
-              <p className="practice-label">Current site stack</p>
-              <ul className="tech-list">
-                {technologies.map((technology) => <li key={technology}>{technology}</li>)}
-              </ul>
-
-            </div>
-          </div>
-        </section>
-
         <section className="practice-section section-shell" id="capabilities" aria-labelledby="capabilities-title">
-          <div className="section-heading"><div><p className="eyebrow">04 / Capabilities</p><h2 id="capabilities-title">Experience across disciplines.</h2></div></div>
-          <div className="project-grid">
-            {capabilities.map((group) => (
-              <article className="project-card project-body capability-card" key={group.title}>
-                <h3>{group.title}</h3><p>{group.description}</p>
-                <ul className="tech-list capability-skills">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
-              </article>
-            ))}
+          <div id="practice" className="anchor-alias" aria-hidden="true" />
+          <div className="section-heading"><div><p className="eyebrow">03 / Capabilities</p><h2 id="capabilities-title">Skills grounded in practice.</h2></div></div>
+          <div className="capability-principles">
+            <h3>Engineering practice</h3>
+            <p>I use version control to keep changes reviewable, automated testing to check my work, and CI/CD to make validation and delivery repeatable. In analytics projects, I define reusable metrics and keep transformation logic in code.</p>
           </div>
+          <ul className="capability-list" role="list">
+            {capabilities.map((group) => (
+              <li className="capability-group" key={group.title}>
+                <h3>{group.title}</h3>
+                <ul className="capability-skills" aria-label={`${group.title} skills`}>
+                  {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </section>
         <section className="practice-section section-shell" id="credentials" aria-labelledby="credentials-title">
-          <div className="section-heading"><div><p className="eyebrow">05 / Foundations & continued learning</p><h2 id="credentials-title">Education & certifications.</h2></div></div>
+          <div className="section-heading"><div><p className="eyebrow">04 / Foundations & continued learning</p><h2 id="credentials-title">Education & certifications.</h2></div></div>
           <div className="education"><h3>University of California, San Diego</h3><p>BS, Management Science · 2014</p></div>
           <ul className="credential-list">
             {certifications.map((item) => (
@@ -227,16 +187,16 @@ export function PortfolioHome() {
         <section className="contact-section section-shell" id="contact" aria-labelledby="contact-title">
           <div className="contact-card">
             <div className="contact-copy">
-              <p className="eyebrow">06 / Contact</p>
+              <p className="eyebrow">05 / Contact</p>
               <h2 id="contact-title">Good work starts with a conversation<span>.</span></h2>
               <p>I&apos;m interested in thoughtful teams, useful problems, and the space where analytics meets software.</p>
             </div>
             <div className="contact-action">
               <span className="contact-label">FIND ME ON</span>
               <a href="https://github.com/mikezhao415" target="_blank" rel="noopener noreferrer" aria-label="Mike Zhao on GitHub">
-                GitHub
+                GitHub <ExternalPageIcon />
               </a>
-              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/mikezhao415/" target="_blank" rel="noopener noreferrer">LinkedIn <ExternalPageIcon /></a>
               <span className="contact-label contact-email-label">GET IN TOUCH</span>
               <a className="contact-email" href="mailto:hello@mikezhao.dev">hello@mikezhao.dev</a>
               <span className="contact-location">San Diego, CA · Pacific Time</span>
@@ -245,11 +205,6 @@ export function PortfolioHome() {
         </section>
       </main>
 
-      <footer className="site-footer section-shell">
-        <a className="wordmark footer-wordmark" href="#top"><span className="wordmark-mark" aria-hidden="true">M</span><span>Mike Zhao</span></a>
-        <span>Built with care in San Diego, California.</span>
-        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
-      </footer>
     </>
   );
 }

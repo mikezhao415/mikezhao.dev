@@ -1,4 +1,4 @@
-import { ExternalPageIcon } from "./external-page-icon";
+import { ExternalPageIcon } from "../../components/external-page-icon";
 import Link from "next/link";
 import Image from "next/image";
 import { architecture, project } from "../../../content/adventureworks";
@@ -39,7 +39,7 @@ export function DashboardScreenshot({ view }: { view: "overview" | "trends" }) {
       />
     </div>
     <figcaption>
-      <strong>{overview ? "Sales Overview" : "Sales Trends"}</strong> — Authentic screenshot of the published AdventureWorks Analytics dashboard, showing a historical sample-data snapshot (May 2011–June 2014). {overview ? "Totals reflect the displayed selection, not a live data feed." : "The chart compares monthly net line sales with order counts using separate axes."}
+      <strong>{overview ? "Sales Overview" : "Sales Trends"}</strong>. Authentic screenshot of the published AdventureWorks Analytics dashboard, showing a historical sample-data snapshot (May 2011–June 2014). {overview ? "Totals reflect the displayed selection, not a live data feed." : "The chart compares monthly net line sales with order counts using separate axes."}
     </figcaption>
   </figure>;
 }
