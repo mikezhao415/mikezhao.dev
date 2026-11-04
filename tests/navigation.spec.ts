@@ -27,7 +27,11 @@ test("contextual brands, exact active pages, and navigation destinations", async
     const internal = await page.locator('a[href^="/"], a[href^="#"]').evaluateAll(links => links.map(link => link.getAttribute("href")!));
     for (const href of new Set(internal)) {
       if (href.startsWith("#")) await expect(page.locator(href)).toHaveCount(1);
-      else expect(routes).toContain(href);
+      else if (href.startsWith("/images/adventureworks/")) {
+        const response = await page.request.get(href);
+        expect(response.ok()).toBeTruthy();
+        expect(response.headers()["content-type"]).toContain("image/webp");
+      } else expect(routes).toContain(href);
     }
   }
 });
@@ -194,5 +198,104 @@ test("external-page icons remain decorative and preserve accessible link names",
       await expect(icon).toHaveAttribute("focusable", "false");
       await expect(icon).toHaveAttribute("stroke-width", "1.8");
     }
+  }
+});
+
+test("AdventureWorks actions and lineage evidence remain accessible at desktop and mobile widths", async ({ page }) => {
+  for (const width of [320, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const card = page.getByRole("article").filter({ has: page.getByRole("heading", { name: "AdventureWorks Analytics", exact: true }) });
+    const study = card.getByRole("link", { name: "Explore the case study", exact: true });
+    const dashboard = card.getByRole("link", { name: "Explore the dashboard", exact: true });
+    await expect(card.getByRole("link")).toHaveCount(2);
+    await expect(study).toHaveAttribute("href", root);
+    await expect(dashboard).toHaveAttribute("href", "https://adventureworks.mikezhao.dev/");
+    await expect(dashboard).toHaveAttribute("target", "_blank");
+    await expect(dashboard).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(dashboard.locator("svg")).toHaveAttribute("aria-hidden", "true");
+    await study.focus();
+    await page.keyboard.press("Tab");
+    await expect(dashboard).toBeFocused();
+    expect(await dashboard.evaluate(el => getComputedStyle(el).outlineStyle)).not.toBe("none");
+    const separated = await card.locator(".project-actions").evaluate(el => {
+      const [first, second] = [...el.querySelectorAll("a")].map(link => link.getBoundingClientRect());
+      return first.bottom <= second.top + 1 || first.right <= second.left + 1;
+    });
+    expect(separated).toBeTruthy();
+    await study.click();
+    await expect(page).toHaveURL(new RegExp(`${root}$`));
+    for (const route of routes.slice(1)) {
+      await page.goto(route);
+      if (route.endsWith("/business")) {
+        const finalSection = page.locator(".case-section").last();
+        await expect(finalSection.getByRole("link")).toHaveCount(2);
+        await expect(finalSection.getByRole("link", { name: /Read the technical perspective/ })).toHaveAttribute("href", `${root}/technical`);
+        await expect(finalSection.getByRole("link", { name: "Explore the dashboard" })).toHaveAttribute("href", "https://adventureworks.mikezhao.dev/");
+        await expect(page.getByText("A foundation for further evaluation")).toHaveCount(0);
+      } else {
+        await expect(page.locator('a[href="https://adventureworks.mikezhao.dev/lineage"]').first()).toBeVisible();
+        await expect(page.locator('a[href$="/docs/custom-dbt-lineage.md"]').first()).toBeVisible();
+      }
+      await expect(page.locator("h1")).toHaveCount(1);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+    }
+  }
+});
+
+test("current dashboard screenshots load with full-size alternatives and responsive proportions", async ({ page }) => {
+  const captures = [
+    ["Sales Overview", "sales-overview", 1600, 1036],
+    ["Sales Trends", "sales-trends", 1600, 1004],
+    ["Data Lineage", "data-lineage", 1600, 2297],
+  ] as const;
+  for (const width of [320, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of [root, `${root}/technical`]) {
+      await page.goto(route);
+      const expected = route === root ? captures : [captures[1]];
+      await expect(page.locator(".case-dashboard-figure")).toHaveCount(expected.length);
+      for (const [title, file, imageWidth, imageHeight] of expected) {
+        const figure = page.locator(".case-dashboard-figure").filter({ has: page.getByRole("link", { name: `View full-size ${title} screenshot`, exact: true }) });
+        const image = figure.getByRole("img");
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).toHaveAttribute("width", `${imageWidth}`);
+        await expect(image).toHaveAttribute("height", `${imageHeight}`);
+        await image.evaluate(async el => { await (el as HTMLImageElement).decode(); });
+        expect(await image.evaluate(el => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        const box = (await image.boundingBox())!;
+        expect(box.width / box.height).toBeCloseTo(imageWidth / imageHeight, 2);
+        const link = figure.getByRole("link");
+        await expect(link).toHaveAttribute("href", `/images/adventureworks/adventureworks-${file}.webp`);
+        await link.focus();
+        await expect(link).toBeFocused();
+        expect(await link.evaluate(el => getComputedStyle(el).outlineStyle)).not.toBe("none");
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+    }
+  }
+  await page.goto(root);
+  await page.getByRole("link", { name: "View full-size Data Lineage screenshot", exact: true }).click();
+  await expect(page).toHaveURL(/\/images\/adventureworks\/adventureworks-data-lineage\.webp$/);
+});
+
+
+test("business reporting comparison keeps readable flows at mobile and desktop widths", async ({ page }) => {
+  for (const width of [320, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(`${root}/business`);
+    const cards = page.locator(".case-compare-card");
+    await expect(cards).toHaveCount(2);
+    await expect(cards.nth(0).getByRole("heading", { name: "Direct transactional reporting" })).toBeVisible();
+    await expect(cards.nth(1).getByRole("heading", { name: "Analytical-layer approach" })).toBeVisible();
+    for (const card of await cards.all()) {
+      await expect(card.locator(".case-compare-flow li")).toHaveCount(3);
+      await expect(card.locator(".case-compare-takeaways p")).toHaveCount(2);
+      const cardBox = await card.boundingBox();
+      expect(cardBox).not.toBeNull();
+      expect(cardBox!.x).toBeGreaterThanOrEqual(0);
+      expect(cardBox!.x + cardBox!.width).toBeLessThanOrEqual(width + 1);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
   }
 });

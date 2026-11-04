@@ -61,10 +61,11 @@ export const selectedWork = [
     category: "Independent analytics engineering project",
     title: "AdventureWorks Analytics",
     description:
-      "I built a reproducible analytics pipeline using Python, dbt, and DuckDB, with automated validation and a published dashboard.",
+      "I built a reproducible Python, dbt and DuckDB pipeline with automated validation. The published dashboard presents historical sales data alongside an interactive dbt-derived lineage viewer.",
     note: "Built with fictional Microsoft AdventureWorks 2022 sample data.",
     href: "/projects/adventureworks-analytics",
     linkLabel: "Explore the case study",
+    dashboardHref: "https://adventureworks.mikezhao.dev/",
   },
   {
     category: "Personal software project",

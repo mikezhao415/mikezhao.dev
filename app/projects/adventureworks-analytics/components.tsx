@@ -1,6 +1,9 @@
 import { ExternalPageIcon } from "../../components/external-page-icon";
 import Link from "next/link";
 import Image from "next/image";
+import overviewImage from "../../../public/images/adventureworks/adventureworks-sales-overview.webp";
+import trendsImage from "../../../public/images/adventureworks/adventureworks-sales-trends.webp";
+import lineageImage from "../../../public/images/adventureworks/adventureworks-data-lineage.webp";
 import { architecture, project } from "../../../content/adventureworks";
 
 export function ArchitectureDiagram() {
@@ -11,7 +14,7 @@ export function ArchitectureDiagram() {
         <div><strong>{step.title}</strong><span>{step.detail}</span></div>
       </li>)}
     </ol>
-    <figcaption>Implemented workflow. The deployed dashboard serves a reviewed static aggregate; it does not run SQL Server or dbt.</figcaption>
+    <figcaption>Implemented workflow. The deployed application serves a reviewed financial aggregate and separately approved lineage metadata. Extraction and modeling run outside the application; it does not run SQL Server, DuckDB, dbt or live ingestion.</figcaption>
   </figure>;
 }
 export function CaseLinks() {
@@ -24,22 +27,43 @@ export function EvidenceLink({ href, children }: { href: string; children: React
   return <a className="case-evidence-link" href={href} target="_blank" rel="noopener noreferrer">{children} <ExternalPageIcon /></a>;
 }
 
-export function DashboardScreenshot({ view }: { view: "overview" | "trends" }) {
-  const overview = view === "overview";
+const screenshots = {
+  overview: {
+    image: overviewImage,
+    path: "/images/adventureworks/adventureworks-sales-overview.webp",
+    title: "Sales Overview",
+    alt: "AdventureWorks Sales Overview with Data lineage in the navigation, showing $109,846,381 in net line sales, 31,465 orders, $3,491 average order value and 274,914 units sold. All territories and categories are selected.",
+    caption: "Published dashboard with the default historical AdventureWorks sales data (May 2011 to June 2014). Totals include all territories and product categories.",
+  },
+  trends: {
+    image: trendsImage,
+    path: "/images/adventureworks/adventureworks-sales-trends.webp",
+    title: "Sales Trends",
+    alt: "AdventureWorks Sales Trends with Data lineage in the navigation and a monthly chart of net line sales and order counts on separate axes. All territories and categories are selected.",
+    caption: "The same historical sales dataset (May 2011 to June 2014), grouped by month. Net line sales use the left axis; order counts use the right axis.",
+  },
+  lineage: {
+    image: lineageImage,
+    path: "/images/adventureworks/adventureworks-data-lineage.webp",
+    title: "Data Lineage",
+    alt: "AdventureWorks Data lineage with mart_sales_summary selected in a graph of six dbt models, two sources and nine dependencies. The node list, model details and historical snapshot provenance appear below the graph.",
+    caption: "Reviewed historical dbt-derived dependency graph with mart_sales_summary selected and all dependencies shown. The metadata snapshot is separate from the financial dataset; it does not indicate continuous refresh or a new dbt run.",
+  },
+};
+
+export function DashboardScreenshot({ view }: { view: keyof typeof screenshots }) {
+  const screenshot = screenshots[view];
   return <figure className="case-dashboard-figure">
     <div className="case-dashboard-frame">
       <Image
-        src={overview ? "/images/adventureworks/adventureworks-sales-overview.webp" : "/images/adventureworks/adventureworks-sales-trends.webp"}
-        alt={overview
-          ? "AdventureWorks Analytics Sales Overview showing $109.8 million in net line sales, 31,465 shipped orders, $3,491 average order value, and 274,914 units sold for May 2011 through June 2014."
-          : "AdventureWorks Analytics Sales Trends dashboard with a monthly chart of net line sales and shipped order counts from 2011 through June 2014, plotted on separate axes."}
-        width={1818}
-        height={832}
+        src={screenshot.image}
+        alt={screenshot.alt}
         sizes="(max-width: 700px) 100vw, (max-width: 1200px) 90vw, 1100px"
       />
     </div>
     <figcaption>
-      <strong>{overview ? "Sales Overview" : "Sales Trends"}</strong>. Authentic screenshot of the published AdventureWorks Analytics dashboard, showing a historical sample-data snapshot (May 2011–June 2014). {overview ? "Totals reflect the displayed selection, not a live data feed." : "The chart compares monthly net line sales with order counts using separate axes."}
+      <strong>{screenshot.title}</strong>. {screenshot.caption}
+      {" "}<a className="case-screenshot-link" href={screenshot.path}>View full-size {screenshot.title} screenshot</a>
     </figcaption>
   </figure>;
 }
