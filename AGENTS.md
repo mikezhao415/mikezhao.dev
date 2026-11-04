@@ -91,6 +91,13 @@ Apply these rules to future website copy, project descriptions, case studies, an
 - Present BI as Code as independent exploration, not organization-wide adoption.
 - The secondary hero CTA **My experience** links to the on-page Professional Direction section (`#journey`); do not replace it with a résumé link without a new decision.
 
+## AdventureWorks documentation and evidence
+
+- The overview, business and technical case-study paths include the published dashboard and lineage capability (PR #25). Keep their links aligned with `content/adventureworks.ts` and the analytics repository’s lineage guide.
+- Preserve the distinction between the reviewed financial aggregate and separately approved historical lineage metadata. Neither implies live ingestion or current dbt test results.
+- Dashboard WebP screenshots have full-size links and intrinsic dimensions. Playwright covers those links/proportions, lineage navigation and responsive business comparisons; these checks do not establish measured architectural benefits.
+- `docs/portfolio-integration.md` and `docs/portfolio-review.md` retain historical review evidence. Use the README and current tests for present functionality.
+
 ## Validation and deployment lessons (October 2026)
 
 - When writing or appending CSS through connector/API scripts, distinguish actual newline characters from literal backslash-n text. **Never insert literal `\\n` tokens between CSS rules.** This twice caused PostCSS `CssSyntaxError: Unknown word \\n` in Vercel builds.
