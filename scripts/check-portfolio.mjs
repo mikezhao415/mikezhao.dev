@@ -94,8 +94,14 @@ for (const route of caseRoutes) {
   const eyebrow = route.path.endsWith('/business') ? 'Business perspective' : route.path.endsWith('/technical') ? 'Technical perspective' : 'BI-AS-CODE';
   assert.ok(routeHtml.includes(`<p class="case-eyebrow">${eyebrow}</p>`), `${route.path}: hero eyebrow`);
   assert.ok(routeHtml.includes('https://adventureworks.mikezhao.dev/'));
-  assert.ok(routeHtml.includes('https://adventureworks.mikezhao.dev/lineage'));
-  assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/custom-dbt-lineage.md'));
+  if (!route.path.endsWith('/business')) {
+    assert.ok(routeHtml.includes('https://adventureworks.mikezhao.dev/lineage'));
+    assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/custom-dbt-lineage.md'));
+  } else {
+    assert.ok(routeHtml.includes('See how the analytical workflow was built'));
+    assert.ok(!routeHtml.includes('08 / Next questions'));
+    assert.ok(!routeHtml.includes('A foundation for further evaluation'));
+  }
   assert.ok(!/live dashboard|real-time updates/i.test(routeHtml));
   for (const [, target] of routeHtml.matchAll(/href="#([^"]+)"/g)) {
     assert.ok(routeHtml.includes(`id="${target}"`), `${route.path}: broken fragment ${target}`);
