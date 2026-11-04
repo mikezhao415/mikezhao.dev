@@ -227,8 +227,16 @@ test("AdventureWorks actions and lineage evidence remain accessible at desktop a
     await expect(page).toHaveURL(new RegExp(`${root}$`));
     for (const route of routes.slice(1)) {
       await page.goto(route);
-      await expect(page.locator('a[href="https://adventureworks.mikezhao.dev/lineage"]').first()).toBeVisible();
-      await expect(page.locator('a[href$="/docs/custom-dbt-lineage.md"]').first()).toBeVisible();
+      if (route.endsWith("/business")) {
+        const finalSection = page.locator(".case-section").last();
+        await expect(finalSection.getByRole("link")).toHaveCount(2);
+        await expect(finalSection.getByRole("link", { name: /Read the technical perspective/ })).toHaveAttribute("href", `${root}/technical`);
+        await expect(finalSection.getByRole("link", { name: "Explore the dashboard" })).toHaveAttribute("href", "https://adventureworks.mikezhao.dev/");
+        await expect(page.getByText("A foundation for further evaluation")).toHaveCount(0);
+      } else {
+        await expect(page.locator('a[href="https://adventureworks.mikezhao.dev/lineage"]').first()).toBeVisible();
+        await expect(page.locator('a[href$="/docs/custom-dbt-lineage.md"]').first()).toBeVisible();
+      }
       await expect(page.locator("h1")).toHaveCount(1);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     }
