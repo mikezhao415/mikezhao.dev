@@ -454,6 +454,12 @@ a:focus-visible {
   line-height: 1.75;
 }
 
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+}
+
 .project-link {
   display: inline-flex;
   align-items: center;
@@ -461,6 +467,10 @@ a:focus-visible {
   margin-top: 20px;
   font-size: 14px;
   font-weight: 700;
+}
+
+.project-link-secondary {
+  font-weight: 500;
 }
 
 .project-link:hover span {

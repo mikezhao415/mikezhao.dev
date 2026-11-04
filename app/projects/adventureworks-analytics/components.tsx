@@ -11,7 +11,7 @@ export function ArchitectureDiagram() {
         <div><strong>{step.title}</strong><span>{step.detail}</span></div>
       </li>)}
     </ol>
-    <figcaption>Implemented workflow. The deployed dashboard serves a reviewed static aggregate; it does not run SQL Server or dbt.</figcaption>
+    <figcaption>Implemented workflow. The deployed application serves a reviewed financial aggregate and separately approved lineage metadata. Extraction and modeling run outside the application; it does not run SQL Server, DuckDB, dbt or live ingestion.</figcaption>
   </figure>;
 }
 export function CaseLinks() {

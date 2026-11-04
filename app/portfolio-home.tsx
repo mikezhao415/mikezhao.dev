@@ -93,11 +93,18 @@ export function PortfolioHome() {
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
                   <p className="project-note">{project.note}</p>
-                  {project.href && (
-                    <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
-                      {project.linkLabel}{project.href.startsWith("http") && <ExternalPageIcon />}
-                    </a>
-                  )}
+                  <div className="project-actions">
+                    {project.href && (
+                      <a className="project-link" href={project.href} target={project.href?.startsWith("http") ? "_blank" : undefined} rel={project.href?.startsWith("http") ? "noopener noreferrer" : undefined}>
+                        {project.linkLabel}{project.href.startsWith("http") && <ExternalPageIcon />}
+                      </a>
+                    )}
+                    {"dashboardHref" in project && project.dashboardHref && (
+                      <a className="project-link project-link-secondary" href={project.dashboardHref} target="_blank" rel="noopener noreferrer">
+                        Explore the dashboard <ExternalPageIcon />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}

@@ -35,8 +35,11 @@ assert.ok(html.includes('href="#contact"') && html.includes('Get in touch'));
 assert.ok(html.includes('/icon.svg'));
 assert.ok(!html.includes('https://github.com/mikezhao415/bi-as-code'));
 assert.ok(!html.includes('Python coursework'));
+assert.match(html, /href="https:\/\/adventureworks.mikezhao.dev\/" target="_blank" rel="noopener noreferrer"[^>]*>Explore the dashboard/);
+assert.ok(html.includes('Explore the case study'));
+assert.ok(!/live dashboard|real-time updates/i.test(html));
 assert.ok(html.includes('Building at the intersection of data and software.'));
-assert.ok(html.includes('I built a reproducible analytics pipeline using Python, dbt, and DuckDB, with automated validation and a published dashboard.'));
+assert.ok(html.includes('I built a reproducible Python, dbt and DuckDB pipeline with automated validation. The published dashboard presents historical sales data alongside an interactive dbt-derived lineage viewer.'));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) {
   assert.ok(html.includes(`id="${match[1]}"`), `Broken anchor: ${match[1]}`);
 }
@@ -54,19 +57,19 @@ const caseRoutes = [
   {
     path: '/projects/adventureworks-analytics',
     title: 'AdventureWorks Analytics | Mike Zhao',
-    description: 'An independent BI-as-Code case study: transactional extraction, tested analytical models, reconciliation and a published sales dashboard.',
+    description: 'An independent BI-as-Code case study: transactional extraction, tested analytical models, reconciliation, a published dashboard and interactive dbt-derived lineage.',
     content: ['From transactional data to trusted analytics', '23 real-source dbt models', 'Two perspectives on one system'],
   },
   {
     path: '/projects/adventureworks-analytics/business',
     title: 'The Business Case for Better Analytics | Mike Zhao',
-    description: 'Why an analytical layer can improve the consistency and maintainability of reporting, and what the AdventureWorks experiment does and does not prove.',
+    description: 'Why an analytical layer can improve the consistency and maintainability of reporting, how interactive lineage exposes dependencies, and what remains unmeasured.',
     content: ['Better analytics starts before the dashboard', 'Conceptual comparison, not a measured benchmark.', 'What the experiment actually demonstrates'],
   },
   {
     path: '/projects/adventureworks-analytics/technical',
     title: 'Technical Implementation | AdventureWorks Analytics | Mike Zhao',
-    description: 'A reproducible SQL Server, Python, Parquet, DuckDB and dbt analytics workflow with independent validation and a Next.js dashboard.',
+    description: 'A reproducible SQL Server, Python, Parquet, DuckDB and dbt analytics workflow with independent validation, a Next.js dashboard and reviewed dbt-derived lineage.',
     content: ['Engineering analytics as a reproducible system', '31,465', '121,317', 'Historical extraction baseline'],
   },
 ];
@@ -91,6 +94,9 @@ for (const route of caseRoutes) {
   const eyebrow = route.path.endsWith('/business') ? 'Business perspective' : route.path.endsWith('/technical') ? 'Technical perspective' : 'BI-AS-CODE';
   assert.ok(routeHtml.includes(`<p class="case-eyebrow">${eyebrow}</p>`), `${route.path}: hero eyebrow`);
   assert.ok(routeHtml.includes('https://adventureworks.mikezhao.dev/'));
+  assert.ok(routeHtml.includes('https://adventureworks.mikezhao.dev/lineage'));
+  assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/custom-dbt-lineage.md'));
+  assert.ok(!/live dashboard|real-time updates/i.test(routeHtml));
   for (const [, target] of routeHtml.matchAll(/href="#([^"]+)"/g)) {
     assert.ok(routeHtml.includes(`id="${target}"`), `${route.path}: broken fragment ${target}`);
   }
@@ -124,6 +130,9 @@ for (const route of caseRoutes) {
   assert.equal(meta('og:image:width'), '1200');
   assert.equal(meta('og:image:height'), '630');
   if (route.path.endsWith('/technical')) {
+    for (const claim of ['six dbt models, two sources and nine direct dependencies', 'React Flow', 'keyboard-accessible', 'shareable URL state', 'canonical JSON', 'SHA-256', 'fails closed', 'Raw SQL, full dbt manifests', 'historical snapshot provenance']) {
+      assert.ok(routeHtml.includes(claim), `Missing lineage contract: ${claim}`);
+    }
     assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/reproducibility.md'));
     assert.ok(routeHtml.includes('The reproduction guide separates running the dashboard locally'));
     assert.ok(routeHtml.includes('A fresh full-source run is separate from this documentation.'));

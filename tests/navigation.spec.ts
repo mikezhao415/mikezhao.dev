@@ -196,3 +196,37 @@ test("external-page icons remain decorative and preserve accessible link names",
     }
   }
 });
+
+test("AdventureWorks actions and lineage evidence remain accessible at desktop and mobile widths", async ({ page }) => {
+  for (const width of [320, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const card = page.getByRole("article").filter({ has: page.getByRole("heading", { name: "AdventureWorks Analytics", exact: true }) });
+    const study = card.getByRole("link", { name: "Explore the case study", exact: true });
+    const dashboard = card.getByRole("link", { name: "Explore the dashboard", exact: true });
+    await expect(card.getByRole("link")).toHaveCount(2);
+    await expect(study).toHaveAttribute("href", root);
+    await expect(dashboard).toHaveAttribute("href", "https://adventureworks.mikezhao.dev/");
+    await expect(dashboard).toHaveAttribute("target", "_blank");
+    await expect(dashboard).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(dashboard.locator("svg")).toHaveAttribute("aria-hidden", "true");
+    await study.focus();
+    await page.keyboard.press("Tab");
+    await expect(dashboard).toBeFocused();
+    expect(await dashboard.evaluate(el => getComputedStyle(el).outlineStyle)).not.toBe("none");
+    const separated = await card.locator(".project-actions").evaluate(el => {
+      const [first, second] = [...el.querySelectorAll("a")].map(link => link.getBoundingClientRect());
+      return first.bottom <= second.top + 1 || first.right <= second.left + 1;
+    });
+    expect(separated).toBeTruthy();
+    await study.click();
+    await expect(page).toHaveURL(new RegExp(`${root}$`));
+    for (const route of routes.slice(1)) {
+      await page.goto(route);
+      await expect(page.locator('a[href="https://adventureworks.mikezhao.dev/lineage"]').first()).toBeVisible();
+      await expect(page.locator('a[href$="/docs/custom-dbt-lineage.md"]').first()).toBeVisible();
+      await expect(page.locator("h1")).toHaveCount(1);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+    }
+  }
+});
