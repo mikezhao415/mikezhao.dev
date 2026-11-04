@@ -27,7 +27,11 @@ test("contextual brands, exact active pages, and navigation destinations", async
     const internal = await page.locator('a[href^="/"], a[href^="#"]').evaluateAll(links => links.map(link => link.getAttribute("href")!));
     for (const href of new Set(internal)) {
       if (href.startsWith("#")) await expect(page.locator(href)).toHaveCount(1);
-      else expect(routes).toContain(href);
+      else if (href.startsWith("/images/adventureworks/")) {
+        const response = await page.request.get(href);
+        expect(response.ok()).toBeTruthy();
+        expect(response.headers()["content-type"]).toContain("image/webp");
+      } else expect(routes).toContain(href);
     }
   }
 });
@@ -229,4 +233,40 @@ test("AdventureWorks actions and lineage evidence remain accessible at desktop a
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     }
   }
+});
+
+test("current dashboard screenshots load with full-size alternatives and responsive proportions", async ({ page }) => {
+  const captures = [
+    ["Sales Overview", "sales-overview", 1600, 1036],
+    ["Sales Trends", "sales-trends", 1600, 1004],
+    ["Data Lineage", "data-lineage", 1600, 2297],
+  ] as const;
+  for (const width of [320, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of [root, `${root}/technical`]) {
+      await page.goto(route);
+      const expected = route === root ? captures : [captures[1]];
+      await expect(page.locator(".case-dashboard-figure")).toHaveCount(expected.length);
+      for (const [title, file, imageWidth, imageHeight] of expected) {
+        const figure = page.locator(".case-dashboard-figure").filter({ has: page.getByRole("link", { name: `View full-size ${title} screenshot`, exact: true }) });
+        const image = figure.getByRole("img");
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).toHaveAttribute("width", `${imageWidth}`);
+        await expect(image).toHaveAttribute("height", `${imageHeight}`);
+        await image.evaluate(async el => { await (el as HTMLImageElement).decode(); });
+        expect(await image.evaluate(el => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        const box = (await image.boundingBox())!;
+        expect(box.width / box.height).toBeCloseTo(imageWidth / imageHeight, 2);
+        const link = figure.getByRole("link");
+        await expect(link).toHaveAttribute("href", `/images/adventureworks/adventureworks-${file}.webp`);
+        await link.focus();
+        await expect(link).toBeFocused();
+        expect(await link.evaluate(el => getComputedStyle(el).outlineStyle)).not.toBe("none");
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+    }
+  }
+  await page.goto(root);
+  await page.getByRole("link", { name: "View full-size Data Lineage screenshot", exact: true }).click();
+  await expect(page).toHaveURL(/\/images\/adventureworks\/adventureworks-data-lineage\.webp$/);
 });

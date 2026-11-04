@@ -130,7 +130,7 @@ for (const route of caseRoutes) {
   assert.equal(meta('og:image:width'), '1200');
   assert.equal(meta('og:image:height'), '630');
   if (route.path.endsWith('/technical')) {
-    for (const claim of ['six dbt models, two sources and nine direct dependencies', 'React Flow', 'keyboard-accessible', 'shareable URL state', 'canonical JSON', 'SHA-256', 'fails closed', 'Raw SQL, full dbt manifests', 'historical snapshot provenance']) {
+    for (const claim of ['six dbt models, two sources and nine direct dependencies', 'React Flow', 'keyboard-accessible', 'shareable URL state', 'separately reviewed publication artifacts', 'Schema, integrity and approval checks', 'no fallback to sample metadata', 'raw SQL, full dbt manifests', 'The lineage snapshot is historical.']) {
       assert.ok(routeHtml.includes(claim), `Missing lineage contract: ${claim}`);
     }
     assert.ok(routeHtml.includes('https://github.com/mikezhao415/adventureworks-analytics/blob/main/docs/reproducibility.md'));
@@ -140,6 +140,13 @@ for (const route of caseRoutes) {
   }
   assert.equal(meta('og:image:alt'), socialAlt);
   assert.equal(meta('twitter:image:alt'), socialAlt);
+}
+for (const name of ['sales-overview', 'sales-trends', 'data-lineage']) {
+  const image = await fetchRoute(`/images/adventureworks/adventureworks-${name}.webp`);
+  assert.match(image.headers.get('content-type') || '', /^image\/webp/);
+  const bytes = Buffer.from(await image.arrayBuffer());
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
 }
 const sitemap = await (await fetchRoute('/sitemap.xml')).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url);

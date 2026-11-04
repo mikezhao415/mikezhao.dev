@@ -981,6 +981,7 @@ a:focus-visible {
 .case-dashboard-frame img { display: block; width: 100%; height: auto; }
 .case-dashboard-figure figcaption { margin-top: 14px; max-width: 850px; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .case-dashboard-figure figcaption strong { color: var(--ink); }
+.case-screenshot-link { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 700px) { .case-dashboard-figure { margin: 24px 0 34px; } }
 
 /* Shared contextual navigation and long-page controls use the existing theme. */
