@@ -278,3 +278,24 @@ test("current dashboard screenshots load with full-size alternatives and respons
   await page.getByRole("link", { name: "View full-size Data Lineage screenshot", exact: true }).click();
   await expect(page).toHaveURL(/\/images\/adventureworks\/adventureworks-data-lineage\.webp$/);
 });
+
+
+test("business reporting comparison keeps readable flows at mobile and desktop widths", async ({ page }) => {
+  for (const width of [320, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(`${root}/business`);
+    const cards = page.locator(".case-compare-card");
+    await expect(cards).toHaveCount(2);
+    await expect(cards.nth(0).getByRole("heading", { name: "Direct transactional reporting" })).toBeVisible();
+    await expect(cards.nth(1).getByRole("heading", { name: "Analytical-layer approach" })).toBeVisible();
+    for (const card of await cards.all()) {
+      await expect(card.locator(".case-compare-flow li")).toHaveCount(3);
+      await expect(card.locator(".case-compare-takeaways p")).toHaveCount(2);
+      const cardBox = await card.boundingBox();
+      expect(cardBox).not.toBeNull();
+      expect(cardBox!.x).toBeGreaterThanOrEqual(0);
+      expect(cardBox!.x + cardBox!.width).toBeLessThanOrEqual(width + 1);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+  }
+});
